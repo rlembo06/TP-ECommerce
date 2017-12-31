@@ -1,15 +1,52 @@
 import {Injectable} from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
+import {DatabaseService} from './database.service'
+
+@Injectable()
+export class AuthentificationService {
+    public token: string;
+    public db: DatabaseService;
+
+    constructor(private http: Http) {
+        // set token if saved in local storage
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.token = currentUser && currentUser.token;
+    }
+    
+    login(user): void {
+                
+        this.db.connection.connect();
+
+        this.db.connection.query(
+            'SELECT * FROM `user`',
+            function (err, rows, fields) {
+                if (!err) console.log('Le résultat de la requête: ', rows);
+                else console.log(err);
+            }
+        );
+
+        this.db.connection.end();
+    }
+    
+    logout(): void {
+        // clear token remove user from local storage to log user out
+        this.token = null;
+        localStorage.removeItem('currentUser');
+    }
+}
+
+
+/*
 @Injectable()
 export class AuthentificationService {
     public token: string;
 
     constructor(private http: Http) {
         // set token if saved in local storage
-        var currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.token = currentUser && currentUser.token;
     }
     
@@ -40,3 +77,4 @@ export class AuthentificationService {
         localStorage.removeItem('currentUser');
     }
 }
+*/

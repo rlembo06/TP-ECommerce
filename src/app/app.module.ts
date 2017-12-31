@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -11,6 +11,7 @@ import {LoginComponent} from './login/login.component';
 
 import {AuthentificationService} from '../services/authentification.service';
 import {GuardService} from '../services/guard.service';
+import {DatabaseService} from '../services/database.service';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import {GuardService} from '../services/guard.service';
     ],
     providers: [
         AuthentificationService,
-        GuardService
+        GuardService,
+        DatabaseService
     ],
     bootstrap: [AppComponent]
 })
