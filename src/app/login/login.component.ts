@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     error = '';
-    result = 'EMPTY';
+    results = 'EMPTY';
 
     constructor(
         private router: Router,
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
         this.authenticationService.getUsers()
             .map(res => res.json())
-            .subscribe(res => this.result = res);
+            .subscribe(res => this.results = res);
     }
 }
 
