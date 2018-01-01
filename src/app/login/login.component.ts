@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     model: any = {};
     loading = false;
     error = '';
+    result = 'EMPTY';
 
     constructor(
         private router: Router,
@@ -23,28 +24,19 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         // reset login status
-        this.authenticationService.logout();
+        //this.authenticationService.logout();
     }
-
-    /*
-    login() {
-        this.loading = true;
-        this.authenticationService.login(this.model.username, this.model.password)
-            .subscribe(result => {
-                if (result === true) {
-                    this.router.navigate(['/']);
-                } else {
-                    this.error = 'Username or password is incorrect';
-                    this.loading = false;
-                }
-            });
-    }
-    */
     
     onSubmit(f: NgForm) {
         console.log(f.value);  // { first: '', last: '' }
         console.log(f.valid);  // false
-        this.authenticationService.login(f.value);
+
+        //this.authenticationService.login(f.value);
+        //this.authenticationService.getUsers();
+
+        this.authenticationService.getUsers()
+            .map(res => res.json())
+            .subscribe(res => this.result = res);
     }
 }
 

@@ -6,6 +6,7 @@ var user = require('../models/user.model');
 // API Routes
 app.get('/', function(req, res) {
 
+    req.accepts('application/json');
 	user.findAll(function(err, rows, fields) {
         if (!err)
         {
@@ -14,6 +15,7 @@ app.get('/', function(req, res) {
         }
         else console.log(err);
     });
+    
 });
 
 app.get('/test', function(req, res) {

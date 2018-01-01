@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
@@ -11,14 +11,17 @@ import {LoginComponent} from './login/login.component';
 
 import {AuthentificationService} from '../services/authentification.service';
 import {GuardService} from '../services/guard.service';
-import {DatabaseService} from '../services/database.service';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 
 @NgModule({
     imports: [
         BrowserModule,
         AppRoutingModule,
         FormsModule,
-        HttpModule
+        HttpModule,
+        JsonpModule
     ],
     declarations: [
         AppComponent,
@@ -27,8 +30,7 @@ import {DatabaseService} from '../services/database.service';
     ],
     providers: [
         AuthentificationService,
-        GuardService,
-        DatabaseService
+        GuardService
     ],
     bootstrap: [AppComponent]
 })
