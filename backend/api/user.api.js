@@ -17,12 +17,7 @@ app.get('/user/all', function (req, res) {
 
 //app.post('/user/login', jwt({secret: 'shhhhhhared-secret'}), function (req, res) {
 app.post('/user/login', function (req, res) {
-
     var data = req.body;
-
-    console.log(req);
-    console.log(data);
-	//req.accepts('application/json');
 
 	user.Login(data, function (err, rows, fields) {
 
