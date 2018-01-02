@@ -1,43 +1,49 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
-import {AuthentificationService} from '../../services/authentification.service';
+import { AuthentificationService } from '../../services/authentification.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+	selector: 'app-login',
+	templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    providers: [AuthentificationService]
 })
 
 export class LoginComponent implements OnInit {
 
-    model: any = {};
-    loading = false;
-    error = '';
-    results = 'EMPTY';
+	model: any = {};
+	loading = false;
+	error = '';
+    results;
+    username: string;
+	password: string;
 
-    constructor(
-        private router: Router,
-        private authenticationService: AuthentificationService
-    ) {}
+	constructor(
+		private router: Router,
+		private authenticationService: AuthentificationService
+	) { }
 
-    ngOnInit() {
-        // reset login status
-        //this.authenticationService.logout();
-    }
-    
-    onSubmit(f: NgForm) {
-        console.log(f.value);  // { first: '', last: '' }
-        console.log(f.valid);  // false
+	ngOnInit() {
+		// reset login status
+		//this.authenticationService.logout();
+	}
 
-        //this.authenticationService.login(f.value);
-        //this.authenticationService.getUsers();
+	login(username, password) {
 
-        this.authenticationService.getUsers()
-            .map(res => res.json())
-            .subscribe(res => this.results = res);
-    }
+		this.authenticationService.login(username, password)
+			.subscribe(result => {
+                console.log(result);
+				if (result === true) {
+					this.router.navigate(['/']);
+				} else {
+					console.log('Username or password is incorrect');
+					//this.error = 'Username or password is incorrect';
+					//this.loading = false;
+				}
+			});
+	}
 }
 
 /*
