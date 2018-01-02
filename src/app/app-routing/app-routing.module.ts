@@ -10,11 +10,10 @@ import {LoginComponent} from '../login/login.component';
 import {GuardService} from '../../services/guard.service';
 
 const routes: Routes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: '', component: DashboardComponent, canActivate: [GuardService] },
     //{ path: 'dashboard', component: DashboardComponent },
-    
+
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
 ];
