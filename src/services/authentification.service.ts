@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
@@ -11,7 +12,11 @@ export class AuthentificationService {
 	public results = [];
 	private uri: string;
 
-	constructor(private http: Http) {
+	constructor(
+        private http: Http,
+        private router: Router,
+    )
+    {
 		this.uri = "http://localhost:3000/";
 	}
 
@@ -51,6 +56,13 @@ export class AuthentificationService {
                     return false;
                 }
             });
-	}
+    }
+
+    logout(): void {
+        // clear token remove user from local storage to log user out
+        this.token = null;
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/login']);
+    }
 
 }
