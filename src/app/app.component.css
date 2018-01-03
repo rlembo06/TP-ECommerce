@@ -25,3 +25,12 @@
 }
 
 .content {margin-top: 70px;}
+
+
+button:focus {
+    outline: 0;
+}
+
+.navbar .dropdown-menu .form-control {
+    width: 200px;
+}
