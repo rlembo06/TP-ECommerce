@@ -1,27 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthentificationService } from '../../services/authentification.service';
-
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css'],
-    providers: [AuthentificationService]
+    styleUrls: ['./dashboard.component.css']
 })
+
 export class DashboardComponent implements OnInit {
 
     title = 'Dashboard';
 
-    constructor(
-		private authenticationService: AuthentificationService
-	) { }
+    constructor() {}
 
     ngOnInit() {
-    }
-
-    logout(): void {
-        console.log('Logout');
-        this.authenticationService.logout();
     }
 
 }

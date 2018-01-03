@@ -25,10 +25,7 @@ export class LoginComponent implements OnInit {
 		private authenticationService: AuthentificationService
 	) { }
 
-	ngOnInit() {
-		// reset login status
-		//this.authenticationService.logout();
-	}
+	ngOnInit() {}
 
 	login(username, password) {
 
