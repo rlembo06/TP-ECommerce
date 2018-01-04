@@ -40,5 +40,12 @@ export class LoginComponent implements OnInit {
 					//this.loading = false;
 				}
 			});
-	}
+    }
+    
+    checkAuth(): boolean {
+        var tokenUser = localStorage.getItem('currentUser');
+
+        if (tokenUser !== null) return true;
+        return false;
+    }
 }

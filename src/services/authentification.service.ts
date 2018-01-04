@@ -9,8 +9,9 @@ import 'rxjs/Rx';
 export class AuthentificationService {
 
 	public token: string;
-	public results = [];
-	private uri: string;
+    public results = [];
+    public authentified = false;
+    private uri: string;
 
 	constructor(
         private http: Http,
@@ -47,7 +48,6 @@ export class AuthentificationService {
 
                     var tokenUser = localStorage.getItem('currentUser');
                     console.log('Token user :', tokenUser);
-                    //console.log('Token user check :', tokenUser);
 
                     // return true to indicate successful login
                     return true;

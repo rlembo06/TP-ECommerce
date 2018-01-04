@@ -14,6 +14,7 @@ import {GuardService} from '../services/guard.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import 'rxjs/Rx';
     declarations: [
         AppComponent,
         DashboardComponent,
-        LoginComponent
+        LoginComponent,
+        UserComponent
     ],
     providers: [
         AuthentificationService,

@@ -5,14 +5,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {DashboardComponent} from '../dashboard/dashboard.component';
-import {LoginComponent} from '../login/login.component';
 import {GuardService} from '../../services/guard.service';
 
+import {DashboardComponent} from '../dashboard/dashboard.component';
+import {LoginComponent} from '../login/login.component';
+import {UserComponent} from '../user/user.component';
+
 const routes: Routes = [
-    { path: 'login', component: LoginComponent },
-    { path: '', component: DashboardComponent, canActivate: [GuardService] },
-    //{ path: 'dashboard', component: DashboardComponent },
+    { path: '', component: DashboardComponent},
+    
+    { path: 'user', component: UserComponent, canActivate: [GuardService] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

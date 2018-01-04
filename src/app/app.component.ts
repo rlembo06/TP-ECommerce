@@ -10,14 +10,20 @@ import { AuthentificationService } from '../services/authentification.service';
 })
 
 export class AppComponent {
-    title = 'app';
-
+    public title = 'app';
+    
     constructor(
 		private authenticationService: AuthentificationService
     ) {}
     
     logout(): void {
-        console.log('Logout');
         this.authenticationService.logout();
+    }
+
+    checkAuth(): boolean {
+        var tokenUser = localStorage.getItem('currentUser');
+
+        if (tokenUser !== null) return true;
+        return false;
     }
 }
