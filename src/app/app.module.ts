@@ -15,6 +15,7 @@ import {GuardService} from '../services/guard.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import { UserComponent } from './user/user.component';
+import { PannierComponent } from './pannier/pannier.component';
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { UserComponent } from './user/user.component';
         AppComponent,
         DashboardComponent,
         LoginComponent,
-        UserComponent
+        UserComponent,
+        PannierComponent
     ],
     providers: [
         AuthentificationService,

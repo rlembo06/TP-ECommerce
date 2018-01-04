@@ -10,11 +10,13 @@ import {GuardService} from '../../services/guard.service';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {LoginComponent} from '../login/login.component';
 import {UserComponent} from '../user/user.component';
+import {PannierComponent} from '../pannier/pannier.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent},
     
     { path: 'user', component: UserComponent, canActivate: [GuardService] },
+    { path: 'pannier', component: PannierComponent, canActivate: [GuardService] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

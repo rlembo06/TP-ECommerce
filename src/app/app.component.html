@@ -14,10 +14,10 @@
 
             <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
                 <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
-                <li class="nav-item"><a class="nav-link" *ngIf="checkAuth()" routerLink="/user">User profil</a></li>
-                <li class="nav-item nav-link logout" (click)="logout()" *ngIf="checkAuth()">Logout</li>
+                <li class="nav-item"><a class="nav-link" *ngIf="checkAuth()" routerLink="/user">Mon profil</a></li>
+                <li class="nav-item nav-link logout"  *ngIf="checkAuth()" (click)="logout()">Déconnexion</li>
                 <li class="dropdown order-1">
-                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle" *ngIf="!checkAuth()">Login <span class="caret"></span></button>
+                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle" *ngIf="!checkAuth()">Connexion <span class="caret"></span></button>
                     <ul *ngIf="!checkAuth()" class="dropdown-menu dropdown-menu-right mt-1">
                         <li class="p-3">
                             <app-login></app-login>
