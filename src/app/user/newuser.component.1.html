@@ -1,0 +1,31 @@
+<div id="newuser">
+
+    <section id="createProfil">
+        <h2>Créer son profil</h2>
+
+        <form (ngSubmit)="createUser()" [formGroup]="createUserForm" class="form" role="form">
+            <div class="form-group">
+                <input id="usernameCreate" name="username" formControlName="username" placeholder="Username" class="form-control form-control-sm" type="text" required="">
+            </div>
+            <div class="form-group">
+                <input id="emailCreate" name="email" formControlName="email" placeholder="Email" class="form-control form-control-sm" type="email" required="">
+            </div>
+            <div class="form-group">
+                <input id="firstnameCreate" name="firstname" formControlName="firstname" placeholder="Prénom" class="form-control form-control-sm" type="text" required="">
+            </div>
+            <div class="form-group">
+                <input id="lastnameCreate" name="lastname" formControlName="lastname" placeholder="Nom" class="form-control form-control-sm" type="text" required="">
+            </div>
+            <div class="form-group">
+                <input id="passwordCreate" name="password" formControlName="password" placeholder="Mot de passe" class="form-control form-control-sm" type="password" required="">
+            </div>
+            <div class="form-group">
+                <input id="password2Create" name="password2" formControlName="password2" placeholder="Confirmer le mot de passe" class="form-control form-control-sm" type="password" required="">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Créer</button>
+            </div>
+        </form>
+    </section><hr>
+        
+</div>

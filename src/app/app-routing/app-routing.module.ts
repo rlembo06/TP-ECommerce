@@ -10,11 +10,13 @@ import {GuardService} from '../../services/guard.service';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {LoginComponent} from '../login/login.component';
 import {UserComponent} from '../user/user.component';
+import {NewuserComponent} from '../user/newuser.component';
 import {PannierComponent} from '../pannier/pannier.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent},
-    
+    { path: 'newuser', component: NewuserComponent },
+
     { path: 'user', component: UserComponent, canActivate: [GuardService] },
     { path: 'pannier', component: PannierComponent, canActivate: [GuardService] },
 
