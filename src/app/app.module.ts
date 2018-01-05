@@ -15,6 +15,7 @@ import {LoginComponent} from './login/login.component';
 
 import {AuthentificationService} from '../services/authentification.service';
 import {GuardService} from '../services/guard.service';
+import {UserService} from '../services/user.service';
 
 import { UserComponent } from './user/user.component';
 import { NewuserComponent } from './user/newuser.component';
@@ -41,7 +42,8 @@ import { PannierComponent } from './pannier/pannier.component';
     ],
     providers: [
         AuthentificationService,
-        GuardService
+        GuardService,
+        UserService
     ],
     bootstrap: [AppComponent]
 })
