@@ -46,5 +46,7 @@ export class NewuserComponent implements OnInit {
 
     createUser(): void {
         this.userService.createUser(this.createUserForm.value);
+        //if (result) alert("Profil ajouté !");
+        //else alert("Echec de la création du profil !");
     }
 }
