@@ -5,9 +5,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { TextEqualityValidatorModule } from "ngx-text-equality-validator";
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { EqualValidatorDirective } from '../directives/equal-validator.directive';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -28,7 +28,8 @@ import { PannierComponent } from './pannier/pannier.component';
         ReactiveFormsModule,
         FormsModule,
         HttpModule,
-        JsonpModule
+        JsonpModule,
+        TextEqualityValidatorModule
     ],
     declarations: [
         AppComponent,
@@ -36,8 +37,7 @@ import { PannierComponent } from './pannier/pannier.component';
         LoginComponent,
         UserComponent,
         NewuserComponent,
-        PannierComponent,
-        EqualValidatorDirective
+        PannierComponent
     ],
     providers: [
         AuthentificationService,

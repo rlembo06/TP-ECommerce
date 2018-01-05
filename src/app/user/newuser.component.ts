@@ -6,11 +6,13 @@
  * https://embed.plnkr.co/gwlm0tRDEgO2kWzDhqEe/: confirm password
  * https://cuppalabs.github.io/tutorials/how-to-implement-angular2-form-validations/ : confirm password
  * https://stackoverflow.com/questions/44449673/custom-validator-on-reactive-form-for-password-and-confirm-password-matching-get
+ * 
+ * https://scotch.io/tutorials/angular-2-form-validation
 */
 
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { EqualValidatorDirective } from '../../directives/equal-validator.directive';
+import { FormControl, FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
+import { TextEqualityValidatorModule } from "ngx-text-equality-validator";
 
 @Component({
   selector: 'app-newuser',
@@ -34,12 +36,12 @@ export class NewuserComponent implements OnInit {
 
     ngOnInit() {
         
-        this.username_ctrl = this.formBulder.control('', Validators.required);
+        this.username_ctrl = this.formBulder.control('',  Validators.required);
         this.email_ctrl = this.formBulder.control('', Validators.required);
         this.firstname_ctrl = this.formBulder.control('', Validators.required);
         this.lastname_ctrl = this.formBulder.control('', Validators.required);
-        this.password_ctrl = this.formBulder.control('', Validators.required);
-        this.confirmPassword_ctrl = this.formBulder.control('', Validators.required);
+        this.password_ctrl = this.formBulder.control('', Validators.required)
+        this.confirmPassword_ctrl = this.formBulder.control('', Validators.required)
 
         this.createUserForm = this.formBulder.group({
             username: this.username_ctrl,
@@ -47,12 +49,11 @@ export class NewuserComponent implements OnInit {
             firstname: this.firstname_ctrl,
             lastname: this.lastname_ctrl,
             password: this.password_ctrl,
-            confirmPassword: this.confirmPassword_ctrl,
         });
         
     }
 
     createUser(){
-        console.log(this.createUserForm);
+        console.log(this.createUserForm.value);
     }
 }

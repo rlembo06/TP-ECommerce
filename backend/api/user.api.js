@@ -34,6 +34,18 @@ app.post('/user/login', function (req, res) {
 
 });
 
+app.post('/user/new', function (req, res) {
+    var data = req.body;
+
+	user.Create(data, function (err, rows, fields) {
+        console.log('ERREURS :', err);
+        console.log('ROWS :', rows);
+        console.log('FIELDS :', fields);
+        return;
+	});
+
+});
+
 app.get('/user/test', function (req, res) {
 	console.log('TEST2');
 });
