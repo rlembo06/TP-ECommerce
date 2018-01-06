@@ -17,8 +17,16 @@ module.exports.Login = function (data, callback) {
 module.exports.Create = function (data, callback) {
     database.getConnection(function (err, connection) {
         connection.query(
-              'INSERT INTO user(username, password, email, firstname, lastname) '
-            + ' VALUES(\"'+ data.username +'\", MD5(\"'+ data.password +'\"), \"'+ data.email +'\", \"'+ data.firstname +'\", \"'+ data.lastname +'\")'
+            'SELECT createUser(\"'+ data.username +'\", \"'+ data.password +'\", \"'+ data.email +'\", \"'+ data.lastname +'\", \"'+ data.firstname +'\")'
         , callback);
     });
 }
+
+/*
+module.exports.Create = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        var values = [data.username, data.password, data.email, data.lastname, data.firstname];
+        connection.query( 'SELECT createUser(?, ?, ?, ?, ?)', values);
+    });
+}
+*/

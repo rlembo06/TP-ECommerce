@@ -4,7 +4,6 @@ var app = express();
 
 var user = require('../models/user.model');
 
-// API Routes
 app.get('/user/all', function (req, res) {
 
 	req.accepts('application/json');
@@ -37,17 +36,19 @@ app.post('/user/login', function (req, res) {
 app.post('/user/new', function (req, res) {
     var data = req.body;
 
+    req.accepts('application/json');
 	user.Create(data, function (err, rows, fields) {
-        console.log('ERREURS :', err);
-        console.log('ROWS :', rows);
-        console.log('FIELDS :', fields);
-        return;
+        if (!err) 
+        {
+            for (var key in rows[0]) {
+                console.log("Key: " + key);
+                console.log("Value: " + rows[0][key]);
+                res.json(rows[0][key]);
+            }
+        }
+		else console.log(err);
 	});
 
-});
-
-app.get('/user/test', function (req, res) {
-	console.log('TEST2');
 });
 
 module.exports = app;
