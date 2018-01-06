@@ -22,6 +22,14 @@ module.exports.Create = function (data, callback) {
     });
 }
 
+module.exports.Get = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query(
+            'SELECT * FROM user WHERE username = \"'+ data.username +'\"'
+        , callback);
+    });
+}
+
 /*
 module.exports.Create = function (data, callback) {
     database.getConnection(function (err, connection) {

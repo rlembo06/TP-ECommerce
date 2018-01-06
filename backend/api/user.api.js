@@ -51,4 +51,15 @@ app.post('/user/new', function (req, res) {
 
 });
 
+app.post('/user/get', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	user.Get(data, function (err, rows, fields) {
+        if (!err) res.json(rows[0]);
+		else console.log(err);
+	});
+
+});
+
 module.exports = app;
