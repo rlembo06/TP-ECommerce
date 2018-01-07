@@ -79,7 +79,7 @@ export class UserComponent implements OnInit {
         });
     }
 
-    createUser() {
+    updateUser() {
         console.log(this.updateUserForm.value);
         /*
         this.userService.updateUser(this.updateUserForm.value)
