@@ -11,10 +11,10 @@
     <section id="updateProfil">
         <h2>Modifier son profil</h2>
 
-        <form class="form" role="form">
+        <form (ngSubmit)="updateUser()" [formGroup]="updateUserForm" class="form" role="form" #f="ngForm" novalidate>
 
             <div class="form-group">
-                <input id="username" name="username" [(ngModel)]="username" 
+                <input id="username" name="username" formControlName="username" [(ngModel)]="username" 
                 placeholder="Username" 
                 class="form-control form-control-sm" 
                 type="text"
@@ -22,7 +22,7 @@
             </div>
 
             <div class="form-group">
-                <input id="email" name="email" [(ngModel)]="email" 
+                <input id="email" name="email" formControlName="email" [(ngModel)]="email" 
                 placeholder="Email" 
                 class="form-control form-control-sm" 
                 type="email" 
@@ -30,8 +30,7 @@
             </div>
 
             <div class="form-group">
-                <input id="firstname" name="firstname" [(ngModel)]="firstname" 
-                [(ngModel)]="firstname" 
+                <input id="firstname" name="firstname" formControlName="firstname" [(ngModel)]="firstname" 
                 placeholder="Prénom" 
                 class="form-control form-control-sm" 
                 type="text" 
@@ -39,7 +38,7 @@
             </div>
 
             <div class="form-group">
-                <input id="lastname" name="lastname" [(ngModel)]="lastname" 
+                <input id="lastname" name="lastname" formControlName="lastname" [(ngModel)]="lastname" 
                 placeholder="Nom" 
                 class="form-control form-control-sm" 
                 type="text" 
@@ -47,7 +46,7 @@
             </div>
 
             <div class="form-group">
-                <input id="city" name="city" [(ngModel)]="city" 
+                <input id="city" name="city" formControlName="city" [(ngModel)]="city" 
                 placeholder="Ville" 
                 class="form-control form-control-sm" 
                 type="text" 
@@ -55,7 +54,7 @@
             </div>
 
             <div class="form-group">
-                <input id="street" name="street" [(ngModel)]="street" 
+                <input id="street" name="street" formControlName="street" [(ngModel)]="street" 
                 placeholder="Adresse" 
                 class="form-control form-control-sm" 
                 type="text" 
@@ -63,7 +62,7 @@
             </div>
 
             <div class="form-group">
-                <input id="cp" name="cp" [(ngModel)]="cp" 
+                <input id="cp" name="cp" formControlName="cp" [(ngModel)]="cp" 
                 placeholder="Code Postale" 
                 class="form-control form-control-sm" 
                 type="text" 
@@ -71,7 +70,7 @@
             </div>
 
             <div class="form-group">
-                <input id="country" name="country" [(ngModel)]="country" 
+                <input id="country" name="country" formControlName="country" [(ngModel)]="country" 
                 placeholder="Pays" 
                 class="form-control form-control-sm" 
                 type="text" 
