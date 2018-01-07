@@ -17,6 +17,10 @@ export class NewuserComponent implements OnInit {
     public lastname_ctrl: FormControl;
     public password_ctrl: FormControl;
     public confirmPassword_ctrl: FormControl;
+    public city_ctrl: FormControl;
+    public street_ctrl: FormControl;
+    public cp_ctrl: FormControl;
+    public country_ctrl: FormControl;
     public createUserForm: FormGroup;
 
     constructor(
@@ -31,7 +35,12 @@ export class NewuserComponent implements OnInit {
         this.firstname_ctrl = this.formBulder.control('', Validators.required);
         this.lastname_ctrl = this.formBulder.control('', Validators.required);
         this.password_ctrl = this.formBulder.control('', Validators.required)
-        this.confirmPassword_ctrl = this.formBulder.control('', Validators.required)
+        this.confirmPassword_ctrl = this.formBulder.control('', Validators.required);
+        this.city_ctrl = this.formBulder.control('', Validators.required);
+        this.street_ctrl = this.formBulder.control('', Validators.required);
+        this.cp_ctrl = this.formBulder.control('', Validators.required);
+        this.country_ctrl = this.formBulder.control('', Validators.required);
+        
 
         this.createUserForm = this.formBulder.group({
             username: this.username_ctrl,
@@ -39,7 +48,11 @@ export class NewuserComponent implements OnInit {
             firstname: this.firstname_ctrl,
             lastname: this.lastname_ctrl,
             password: this.password_ctrl,
-            confirmPassword: this.confirmPassword_ctrl
+            confirmPassword: this.confirmPassword_ctrl,
+            city: this.city_ctrl,
+            street: this.street_ctrl,
+            cp: this.cp_ctrl,
+            country: this.country_ctrl
         });
 
     }

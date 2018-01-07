@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { User } from '../class/user';
 
 @Injectable()
 export class UserService {
@@ -14,7 +15,7 @@ export class UserService {
 		this.uri = "http://localhost:3000/";
 	}
 
-    createUser(user: Object): Observable<string> {
+    createUser(user: User): Observable<string> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
 
@@ -25,6 +26,19 @@ export class UserService {
             });
     }
 
+    getUser(): Observable<User> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        let user = localStorage.getItem('currentUser');
+        return this.http.post(this.uri + "user/get", user, options)
+            .map((response: Response) => {
+                var result = response._body;
+                return JSON.parse(result);
+            });
+    }
+
+    /*
     getUser(): Observable<Object> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
@@ -36,5 +50,6 @@ export class UserService {
                 return JSON.parse(result);
             });
     }
+    */
 
 }

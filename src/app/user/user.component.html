@@ -12,6 +12,7 @@
         <h2>Modifier son profil</h2>
 
         <form class="form" role="form">
+
             <div class="form-group">
                 <input id="username" name="username" [(ngModel)]="username" 
                 placeholder="Username" 
@@ -19,6 +20,7 @@
                 type="text"
                 required>
             </div>
+
             <div class="form-group">
                 <input id="email" name="email" [(ngModel)]="email" 
                 placeholder="Email" 
@@ -26,14 +28,16 @@
                 type="email" 
                 required>
             </div>
+
             <div class="form-group">
-                <input id="firstname" name="firstname" 
+                <input id="firstname" name="firstname" [(ngModel)]="firstname" 
                 [(ngModel)]="firstname" 
                 placeholder="Prénom" 
                 class="form-control form-control-sm" 
                 type="text" 
                 required>
             </div>
+
             <div class="form-group">
                 <input id="lastname" name="lastname" [(ngModel)]="lastname" 
                 placeholder="Nom" 
@@ -41,6 +45,50 @@
                 type="text" 
                 required>
             </div>
+
+            <div class="form-group">
+                <input id="city" name="city" [(ngModel)]="city" 
+                placeholder="Ville" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="street" name="street" [(ngModel)]="street" 
+                placeholder="Adresse" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="cp" name="cp" [(ngModel)]="cp" 
+                placeholder="Code Postale" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="country" name="country" [(ngModel)]="country" 
+                placeholder="Pays" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Modifier</button>
+            </div>
+        </form>
+
+    </section><hr>
+
+    <section id="deleteProfil">
+        <h2>Modifier son mot de passe</h2>
+
+        <form class="form" role="form">
             <div class="form-group">
                 <input id="oldPassword" name="oldPassword" [(ngModel)]="oldPassword" 
                 placeholder="Mot de passe actuel" 
@@ -48,6 +96,7 @@
                 type="password" 
                 required>
             </div>
+
             <div class="form-group">
                 <input id="newPassword" name="newPassword" [(ngModel)]="newPassword" 
                 placeholder="Nouveau Mot de passe" 
@@ -55,6 +104,7 @@
                 type="password" 
                 required>
             </div>
+
             <div class="form-group">
                 <input id="password2" name="password2" [(ngModel)]="password2" 
                 placeholder="Confirmer le mot de passe" 
@@ -62,6 +112,7 @@
                 type="password" 
                 required>
             </div>
+
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Modifier</button>
             </div>

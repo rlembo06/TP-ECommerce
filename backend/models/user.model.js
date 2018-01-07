@@ -17,7 +17,16 @@ module.exports.Login = function (data, callback) {
 module.exports.Create = function (data, callback) {
     database.getConnection(function (err, connection) {
         connection.query(
-            'SELECT createUser(\"'+ data.username +'\", \"'+ data.password +'\", \"'+ data.email +'\", \"'+ data.lastname +'\", \"'+ data.firstname +'\")'
+            'SELECT createUser('
+            + '\"'+ data.username +'\", '
+            + '\"'+ data.password +'\", '
+            + '\"'+ data.email +'\", '
+            + '\"'+ data.lastname +'\", '
+            + '\"'+ data.firstname +'\", '
+            + '\"'+ data.city +'\", '
+            + '\"'+ data.street +'\", '
+            + data.cp +', '
+            + '\"'+ data.country +'\")'
         , callback);
     });
 }
