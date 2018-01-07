@@ -33,7 +33,7 @@ app.post('/user/login', function (req, res) {
 
 });
 
-app.post('/user/new', function (req, res) {
+app.post('/user', function (req, res) {
     var data = req.body;
 
     req.accepts('application/json');
@@ -41,12 +41,21 @@ app.post('/user/new', function (req, res) {
         if (!err) 
         {
             for (var key in rows[0]) {
-                console.log("Key: " + key);
-                console.log("Value: " + rows[0][key]);
-                res.json(rows[0][key]);
+                res.send(rows[0][key]);
             }
         }
 		else console.log(err);
+	});
+
+});
+
+app.put('/user', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	user.Update(data, function (err, rows, fields) {
+        if (!err) res.send("Profil mis à jour !");
+		else res.send("Echec de la mise à jour du profil !");
 	});
 
 });

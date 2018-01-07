@@ -19,7 +19,7 @@ export class UserService {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.uri + "user/new", JSON.stringify(user), options)
+        return this.http.post(this.uri + "user", JSON.stringify(user), options)
             .map((response: Response) => {
                 console.log(response._body);
                 return response._body;

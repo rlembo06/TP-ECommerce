@@ -39,6 +39,22 @@ module.exports.Get = function (data, callback) {
     });
 }
 
+module.exports.Update = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query(
+            'CALL updateUser('
+            + '\"'+ data.username +'\", '
+            + '\"'+ data.email +'\", '
+            + '\"'+ data.lastname +'\", '
+            + '\"'+ data.firstname +'\", '
+            + '\"'+ data.city +'\", '
+            + '\"'+ data.street +'\", '
+            + data.cp +', '
+            + '\"'+ data.country +'\")'
+        , callback);
+    });
+}
+
 /*
 module.exports.Create = function (data, callback) {
     database.getConnection(function (err, connection) {
