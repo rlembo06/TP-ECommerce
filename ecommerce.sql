@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Sam 06 Janvier 2018 à 17:48
+-- Généré le :  Dim 07 Janvier 2018 à 16:56
 -- Version du serveur :  10.1.26-MariaDB-0+deb9u1
 -- Version de PHP :  7.0.19-1
 
@@ -24,7 +24,7 @@ DELIMITER $$
 --
 -- Fonctions
 --
-CREATE DEFINER=`root`@`localhost` FUNCTION `createUser` (`_username` VARCHAR(255), `_password` VARCHAR(255), `_email` VARCHAR(255), `_lastname` VARCHAR(255), `_firstname` VARCHAR(255)) RETURNS TEXT CHARSET utf8mb4 READS SQL DATA
+CREATE DEFINER=`root`@`localhost` FUNCTION `createUser` (`_username` VARCHAR(255), `_password` VARCHAR(255), `_email` VARCHAR(255), `_lastname` VARCHAR(255), `_firstname` VARCHAR(255), `_city` VARCHAR(255), `_street` VARCHAR(255), `_cp` INTEGER(5), `_country` VARCHAR(255)) RETURNS TEXT CHARSET utf8mb4 READS SQL DATA
 BEGIN
 	DECLARE response TEXT;
 	DECLARE existUsername INT;
@@ -46,8 +46,8 @@ BEGIN
 	END IF;
 
 	IF (existEmail = 0 && existUsername = 0) THEN
-		INSERT INTO user(username, password, email, lastname, firstname) 
-		VALUES (_username, MD5(_password), _email, _lastname, _firstname) ;
+		INSERT INTO user(username, password, email, lastname, firstname, city, street, cp, country) 
+		VALUES (_username, MD5(_password), _email, _lastname, _firstname, _city, _street, _cp, _country) ;
 		
 		SET response:= "Profil ajouté !";
 	END IF;
@@ -69,19 +69,24 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `firstname` varchar(255) NOT NULL
+  `firstname` varchar(255) NOT NULL,
+  `city` varchar(255) NOT NULL,
+  `street` varchar(255) NOT NULL,
+  `cp` int(5) NOT NULL,
+  `country` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Contenu de la table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `email`, `lastname`, `firstname`) VALUES
-(2, 'test2', 'ad0234829205b9033196ba818f7a872b', 'test2', 'test2', 'test2'),
-(3, 'test2', 'ad0234829205b9033196ba818f7a872b', 'test2', 'test2', 'test2'),
-(4, 'test3', 'test3', 'test3@test3.fr', 'test3', 'test3'),
-(6, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.fr', 'test', 'test'),
-(8, 'username', '098f6bcd4621d373cade4e832627b4f6', 'email@test.fr', 'nom', 'préom');
+INSERT INTO `user` (`id`, `username`, `password`, `email`, `lastname`, `firstname`, `city`, `street`, `cp`, `country`) VALUES
+(2, 'test2', 'ad0234829205b9033196ba818f7a872b', 'test2', 'test2', 'test2', '', '', 0, ''),
+(3, 'test2', 'ad0234829205b9033196ba818f7a872b', 'test2', 'test2', 'test2', '', '', 0, ''),
+(4, 'test3', 'test3', 'test3@test3.fr', 'test3', 'test3', '', '', 0, ''),
+(6, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.fr', 'test', 'test', '', '', 0, ''),
+(8, 'username', '098f6bcd4621d373cade4e832627b4f6', 'email@test.fr', 'nom', 'préom', '', '', 0, ''),
+(10, 'rlembo', '098f6bcd4621d373cade4e832627b4f6', 'romainlembo06@gmail.com', 'Lembo', 'Romain', 'Villeneuve', '1312, Boulevard Pierre Sauvaigo', 6480, 'France');
 
 --
 -- Index pour les tables exportées
@@ -101,7 +106,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
