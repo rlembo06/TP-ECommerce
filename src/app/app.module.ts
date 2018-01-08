@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { TextEqualityValidatorModule } from "ngx-text-equality-validator";

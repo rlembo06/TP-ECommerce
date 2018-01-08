@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
+//import jwt from 'angular2-jwt-simple';
+var jwt = require('angular2-jwt-simple');
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 
@@ -25,7 +27,7 @@ export class AuthentificationService {
 		return this.http.get(this.uri + "user/all");
 	}
 
-	login(username: string, password: string): Observable<boolean> {
+    login(username: string, password: string): Observable<boolean> {
 
         var user = {
 			username: username,
@@ -37,22 +39,16 @@ export class AuthentificationService {
 
         return this.http.post(this.uri + "user/login", JSON.stringify(user), options)
             .map((response: Response) => {
-                // login successful if there's a jwt token in the response
-                let token = response.json();
-                if (token) {
-                    // set token property
-                    this.token = token;
+
+                this.token = jwt.decode(response.text(), 'secret');
+                if (this.token) {
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: token }));
-
+                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: this.token }));
                     var tokenUser = localStorage.getItem('currentUser');
-                    console.log('Token user :', tokenUser);
 
-                    // return true to indicate successful login
                     return true;
                 } else {
-                    // return false to indicate failed login
                     return false;
                 }
             });

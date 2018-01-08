@@ -45,7 +45,10 @@ export class LoginComponent implements OnInit {
     checkAuth(): boolean {
         var tokenUser = localStorage.getItem('currentUser');
 
-        if (tokenUser !== null) return true;
-        return false;
+        if (tokenUser !== null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
