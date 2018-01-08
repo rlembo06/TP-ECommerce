@@ -21,8 +21,8 @@ export class UserService {
 
         return this.http.post(this.uri + "user", JSON.stringify(user), options)
             .map((response: Response) => {
-                console.log(response._body);
-                return response._body;
+                console.log(response.text());
+                return response.text();
             });
     }
 
@@ -32,8 +32,8 @@ export class UserService {
 
         return this.http.put(this.uri + "user", JSON.stringify(user), options)
             .map((response: Response) => {
-                console.log(response._body);
-                return response._body;
+                console.log(response.text());
+                return response.text();
             });
     }
 
@@ -44,21 +44,31 @@ export class UserService {
         let user = localStorage.getItem('currentUser');
         return this.http.post(this.uri + "user/get", user, options)
             .map((response: Response) => {
-                var result = response._body;
+                var result = response.text();
                 return JSON.parse(result);
             });
     }
 
-    /*
-    getUser(): Observable<Object> {
+    updatePassword(user: User): Observable<string> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
 
-        let user = localStorage.getItem('currentUser');
-        return this.http.post(this.uri + "user/get", user, options)
+        return this.http.put(this.uri + "user/password", JSON.stringify(user), options)
             .map((response: Response) => {
-                var result = response._body;
-                return JSON.parse(result);
+                console.log(response.text());
+                return response.text();
+            });
+    }
+
+    /*
+    updatePassword(user: Object): Observable<string> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(this.uri + "user/password", JSON.stringify({user}), options)
+            .map((response: Response) => {
+                console.log(response.text());
+                return response.text();
             });
     }
     */

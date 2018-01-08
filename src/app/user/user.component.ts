@@ -34,14 +34,16 @@ export class UserComponent implements OnInit {
     public email_ctrl: FormControl;
     public firstname_ctrl: FormControl;
     public lastname_ctrl: FormControl;
-    public password_ctrl: FormControl;
-    public confirmPassword_ctrl: FormControl;
     public city_ctrl: FormControl;
     public street_ctrl: FormControl;
     public cp_ctrl: FormControl;
     public country_ctrl: FormControl;
-
     public updateUserForm: FormGroup;
+
+    public oldPassword_ctrl: FormControl;
+    public newPassword_ctrl: FormControl;
+    public confirmPassword_ctrl: FormControl;
+    public updatePasswordForm: FormGroup;
 
     constructor(
         private router: Router,
@@ -51,7 +53,6 @@ export class UserComponent implements OnInit {
     ) { 
         var token = localStorage.getItem('currentUser');
         this.user = JSON.parse(token);
-        console.log(this.user);
     }
 
     ngOnInit() {
@@ -84,6 +85,17 @@ export class UserComponent implements OnInit {
             cp: this.cp_ctrl,
             country: this.country_ctrl
         });
+
+        this.oldPassword_ctrl = this.formBulder.control('');
+        this.newPassword_ctrl = this.formBulder.control('');
+        this.confirmPassword_ctrl = this.formBulder.control('');
+
+        this.updatePasswordForm = this.formBulder.group({
+            username: this.user.username,
+            old_password: this.oldPassword_ctrl,
+            new_password: this.newPassword_ctrl,
+            confirm_password: this.confirmPassword_ctrl
+        });
     }
 
     updateUser() {
@@ -100,5 +112,15 @@ export class UserComponent implements OnInit {
                 this.user = JSON.parse(tokenUser);
                 this.router.navigate(['/user']);
             });
+    }
+
+    updatePassword() {
+        console.log(this.updatePasswordForm.value);
+        
+        this.userService.updatePassword(this.updatePasswordForm.value)
+            .subscribe(result => {
+                alert(result);
+            });
+        
     }
 }
