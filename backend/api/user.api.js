@@ -62,6 +62,21 @@ app.post('/user', function (req, res) {
 	});
 });
 
+app.put('/user/password', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	user.UpdatePassword(data, function (err, rows, fields) {
+        if (!err)
+        {
+            for (var key in rows[0]) {
+                res.send(rows[0][key]);
+            }
+        }
+		else console.log(err);
+	});
+});
+
 app.put('/user', function (req, res) {
     var data = req.body;
 

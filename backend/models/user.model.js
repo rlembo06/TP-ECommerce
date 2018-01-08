@@ -55,6 +55,12 @@ module.exports.Update = function (data, callback) {
     });
 }
 
+module.exports.UpdatePassword = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query('SELECT updatePassword (\"'+ data.username +'\", \"'+ data.old_password +'\", \"'+ data.new_password +'\")', callback);
+    });
+}
+
 /*
 module.exports.Create = function (data, callback) {
     database.getConnection(function (err, connection) {
