@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Dim 07 Janvier 2018 à 19:08
+-- Généré le :  Lun 08 Janvier 2018 à 23:26
 -- Version du serveur :  10.1.26-MariaDB-0+deb9u1
 -- Version de PHP :  7.0.19-1
 
@@ -102,6 +102,29 @@ BEGIN
 	return response;
 END$$
 
+CREATE DEFINER=`root`@`localhost` FUNCTION `updatePassword` (`_username` VARCHAR(255), `_password` VARCHAR(255), `_new_password` VARCHAR(255)) RETURNS TEXT CHARSET utf8mb4 READS SQL DATA
+BEGIN
+	DECLARE checking INT;
+	DECLARE response TEXT;
+	
+	SET checking := 0;
+	SET checking := (SELECT COUNT(*) FROM user WHERE username = _username AND password = MD5(_password));
+
+	IF (checking > 0) THEN
+		UPDATE user 
+		SET password = MD5(_new_password)
+		WHERE username = _username;
+
+		SET response := "Mot de passe modifié.";
+	END IF;
+
+	IF (checking = 0) THEN
+		SET response := "Echec de la mise à jour du mot de passe.";
+	END IF;
+
+	return response;
+END$$
+
 DELIMITER ;
 
 -- --------------------------------------------------------
@@ -133,7 +156,7 @@ INSERT INTO `user` (`id`, `username`, `password`, `email`, `lastname`, `firstnam
 (4, 'test3', 'test3', 'test3@test3.fr', 'test3', 'test3', '', '', 0, ''),
 (6, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.fr', 'test', 'test', 'CITY', '12, STREET', 75000, 'FRANCE'),
 (8, 'username', '098f6bcd4621d373cade4e832627b4f6', 'email@test.fr', 'nom', 'préom', '', '', 0, ''),
-(10, 'rlembo', '098f6bcd4621d373cade4e832627b4f6', 'romainlembo06@gmail.com', 'Lembo', 'Romain', 'Villeneuve', '1312, Boulevard Pierre Sauvaigo', 6480, 'France'),
+(10, 'rlembo', '7c6483ddcd99eb112c060ecbe0543e86', 'romainlembo06@gmail.com', 'Romain', 'LEMBO', 'Villeneuve-Loubet', '500, Avenue Bel Air', 6270, 'France'),
 (12, 'Cecile06', '098f6bcd4621d373cade4e832627b4f6', 'cecile.etourneau06@gmail.Com', 'Etourneau', 'Cécile', 'Villeneuve ', '55, Rue de ouf', 6270, 'France'),
 (13, 'Cecile066', '098f6bcd4621d373cade4e832627b4f6', 'cecile.etourneau06@gmail.Com6', 'Etourneau', 'Cécile', 'Villeneuve ', '55, Rue de ouf', 6270, 'France');
 
@@ -155,7 +178,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
