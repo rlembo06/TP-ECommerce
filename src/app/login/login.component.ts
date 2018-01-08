@@ -13,12 +13,8 @@ import { AuthentificationService } from '../../services/authentification.service
 
 export class LoginComponent implements OnInit {
 
-	model: any = {};
-	loading = false;
-	error = '';
-    results;
-    username: string;
-	password: string;
+    public username: string;
+	public password: string;
 
 	constructor(
 		private router: Router,
@@ -35,7 +31,7 @@ export class LoginComponent implements OnInit {
 				if (result === true) {
 					this.router.navigate(['/']);
 				} else {
-					console.log('Username or password is incorrect');
+					alert('Username or password is incorrect');
 					//this.error = 'Username or password is incorrect';
 					//this.loading = false;
 				}

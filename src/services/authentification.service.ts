@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-//import jwt from 'angular2-jwt-simple';
-var jwt = require('angular2-jwt-simple');
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
+
+var jwt = require('angular2-jwt-simple');
+//import jwt from 'angular2-jwt-simple';
 
 @Injectable()
 export class AuthentificationService {
@@ -44,7 +45,7 @@ export class AuthentificationService {
                 if (this.token) {
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
-                    localStorage.setItem('currentUser', JSON.stringify({ username: username, token: this.token }));
+                    localStorage.setItem('currentUser', JSON.stringify(this.token));
                     var tokenUser = localStorage.getItem('currentUser');
 
                     return true;

@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
 import { TextEqualityValidatorModule } from "ngx-text-equality-validator";
 import { UserService } from '../../services/user.service';
+import { User } from '../../class/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -14,6 +16,8 @@ import { UserService } from '../../services/user.service';
 
 })
 export class UserComponent implements OnInit {
+    
+    public user: User;
 
     public id: number;
     public username: string;
@@ -40,32 +44,35 @@ export class UserComponent implements OnInit {
     public updateUserForm: FormGroup;
 
     constructor(
+        private router: Router,
         private formBulder: FormBuilder,
         private userService : UserService
-    ) { }
+        
+    ) { 
+        var token = localStorage.getItem('currentUser');
+        this.user = JSON.parse(token);
+        console.log(this.user);
+    }
 
     ngOnInit() {
-
-        this.userService.getUser()
-            .subscribe(result => {
-                this.username = result.username;
-                this.email = result.email;
-                this.firstname = result.firstname;
-                this.lastname = result.lastname;
-                this.city = result.city;
-                this.street = result.street;
-                this.cp = result.cp;
-                this.country = result.country;
-            });
-
-        this.username_ctrl = this.formBulder.control(this.username);
-        this.email_ctrl = this.formBulder.control(this.email);
-        this.firstname_ctrl = this.formBulder.control(this.firstname);
-        this.lastname_ctrl = this.formBulder.control(this.lastname);
-        this.city_ctrl = this.formBulder.control(this.city);
-        this.street_ctrl = this.formBulder.control(this.street);
-        this.cp_ctrl = this.formBulder.control(this.cp);
-        this.country_ctrl = this.formBulder.control(this.country);
+        
+        this.username = this.user.username;
+        this.email = this.user.email;
+        this.firstname = this.user.firstname;
+        this.lastname = this.user.lastname;
+        this.city = this.user.city;
+        this.street = this.user.street;
+        this.cp = this.user.cp;
+        this.country = this.user.country;
+        
+        this.username_ctrl = this.formBulder.control(this.user.username);
+        this.email_ctrl = this.formBulder.control(this.user.email);
+        this.firstname_ctrl = this.formBulder.control(this.user.firstname);
+        this.lastname_ctrl = this.formBulder.control(this.user.lastname);
+        this.city_ctrl = this.formBulder.control(this.user.city);
+        this.street_ctrl = this.formBulder.control(this.user.street);
+        this.cp_ctrl = this.formBulder.control(this.user.cp);
+        this.country_ctrl = this.formBulder.control(this.user.country);
 
         this.updateUserForm = this.formBulder.group({
             username: this.username_ctrl,
@@ -80,12 +87,18 @@ export class UserComponent implements OnInit {
     }
 
     updateUser() {
-        console.log(this.updateUserForm.value);
-        /*
+
         this.userService.updateUser(this.updateUserForm.value)
             .subscribe(result => {
                 alert(result);
             });
-        */
+        
+        this.userService.getUser()
+            .subscribe(result => {
+                localStorage.setItem('currentUser', JSON.stringify(result));
+                var tokenUser = localStorage.getItem('currentUser');
+                this.user = JSON.parse(tokenUser);
+                this.router.navigate(['/user']);
+            });
     }
 }
