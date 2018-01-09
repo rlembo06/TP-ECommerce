@@ -61,6 +61,12 @@ module.exports.UpdatePassword = function (data, callback) {
     });
 }
 
+module.exports.Delete = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query('DELETE FROM user WHERE username = \"'+ data.username +'\"', callback);
+    });
+}
+
 /*
 module.exports.Create = function (data, callback) {
     database.getConnection(function (err, connection) {

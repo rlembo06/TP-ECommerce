@@ -37,6 +37,17 @@ export class UserService {
             });
     }
 
+    deleteUser(user: User): Observable<string> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(this.uri + "user/delete", JSON.stringify(user), options)
+            .map((response: Response) => {
+                console.log(response.text());
+                return response.text();
+            });
+    }
+
     getUser(): Observable<User> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });

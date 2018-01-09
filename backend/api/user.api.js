@@ -87,6 +87,16 @@ app.put('/user', function (req, res) {
 	});
 });
 
+app.put('/user/delete', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	user.Delete(data, function (err, rows, fields) {
+        if (!err) res.send("Profil supprimé !");
+		else res.send("Echec de la suppression du profil !");
+	});
+});
+
 app.post('/user/get', function (req, res) {
     var data = req.body;
 

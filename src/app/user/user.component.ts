@@ -9,6 +9,8 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../class/user';
 import { Router } from '@angular/router';
 
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -16,6 +18,7 @@ import { Router } from '@angular/router';
 
 })
 export class UserComponent implements OnInit {
+    
 
     public user: User;
 
@@ -123,5 +126,14 @@ export class UserComponent implements OnInit {
                 alert(result);
             });
 
+    }
+
+    deleteUser() {
+        this.userService.deleteUser(this.user)
+            .subscribe(result => {
+                alert(result);
+                localStorage.removeItem('currentUser');
+                this.router.navigate(['/']);
+            });
     }
 }

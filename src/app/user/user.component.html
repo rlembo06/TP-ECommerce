@@ -123,9 +123,19 @@
     <section id="deleteProfil">
         <h2>Supprimer son profil</h2>
 
-        <form class="form" role="form">
+        <form (ngSubmit)="deleteUser()" class="form" role="form" #f="ngForm" novalidate>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Supprimer</button>
+                <!--
+                <button
+                    class="btn btn-primary btn-block"
+                    mwlConfirmationPopover
+                    placement="top"
+                    (confirm)="confirmClicked = true"
+                    (cancel)="cancelClicked = true">
+                        Supprimer
+                </button>
+                -->
             </div>
         </form>
     </section><hr>

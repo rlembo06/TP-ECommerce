@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule, Http, RequestOptions } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -27,7 +28,10 @@ import { PannierComponent } from './pannier/pannier.component';
         ReactiveFormsModule,
         FormsModule,
         HttpModule,
-        JsonpModule
+        JsonpModule,
+        ConfirmationPopoverModule.forRoot({
+            focusButton: 'confirm'
+        })
     ],
     declarations: [
         AppComponent,
