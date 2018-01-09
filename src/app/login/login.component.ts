@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private authenticationService: AuthentificationService
+        private authenticationService: AuthentificationService,
 	) { }
 
 	ngOnInit() {}
@@ -32,12 +32,10 @@ export class LoginComponent implements OnInit {
 					this.router.navigate(['/']);
 				} else {
 					alert('Username or password is incorrect');
-					//this.error = 'Username or password is incorrect';
-					//this.loading = false;
 				}
 			});
     }
-    
+
     checkAuth(): boolean {
         var tokenUser = localStorage.getItem('currentUser');
 

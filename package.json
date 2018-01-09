@@ -22,6 +22,8 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "angular-stormpath": "^0.2.0",
+    "angular2-jsonwebtoken": "^0.8.1",
+    "angular2-jwt": "^0.2.3",
     "angular2-jwt-simple": "^0.5.4",
     "angular2-text-equality-validator": "^2.0.0",
     "aproba": "^1.2.0",

@@ -5,10 +5,6 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import * as jwt from 'angular2-jwt-simple';
-//import { jwt } from 'angular2-jwt-simple';
-//import jwt from 'angular2-jwt-simple';
-
-//const jwt = require('angular2-jwt-simple');
 
 @Injectable()
 export class AuthentificationService {
@@ -21,6 +17,7 @@ export class AuthentificationService {
 	constructor(
         private http: Http,
         private router: Router,
+        //public jwtHelper: JwtHelper
     )
     {
 		this.uri = "http://localhost:3000/";
@@ -28,10 +25,12 @@ export class AuthentificationService {
 
 	getUsers() {
 		return this.http.get(this.uri + "user/all");
-	}
-
+    }
+    
+    
     login(username: string, password: string): Observable<boolean> {
 
+        //let jwtHelper: JwtHelper;
         let user = {
 			username: username,
 			password: password
@@ -44,6 +43,7 @@ export class AuthentificationService {
             .map((response: Response) => {
 
                 this.token = jwt.decode(response.text(), 'secret');
+
                 if (this.token) {
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
@@ -56,6 +56,7 @@ export class AuthentificationService {
                 }
             });
     }
+    
 
     logout(): void {
         // clear token remove user from local storage to log user out
