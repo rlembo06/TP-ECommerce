@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
 import * as jwt from 'angular2-jwt-simple';
+//import { jwt } from 'angular2-jwt-simple';
+//import jwt from 'angular2-jwt-simple';
+
+//const jwt = require('angular2-jwt-simple');
 
 @Injectable()
 export class AuthentificationService {
