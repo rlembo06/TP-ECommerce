@@ -78,8 +78,8 @@ export class UserComponent implements OnInit {
         this.updateUserForm = this.formBulder.group({
             username: this.username_ctrl,
             email: this.email_ctrl,
-            lastname: this.firstname_ctrl,
-            firstname: this.lastname_ctrl,
+            lastname: this.lastname_ctrl,
+            firstname: this.firstname_ctrl,
             city: this.city_ctrl,
             street: this.street_ctrl,
             cp: this.cp_ctrl,
@@ -103,14 +103,15 @@ export class UserComponent implements OnInit {
         this.userService.updateUser(this.updateUserForm.value)
             .subscribe(result => {
                 alert(result);
-            });
 
-        this.userService.getUser()
-            .subscribe(result => {
-                localStorage.setItem('currentUser', JSON.stringify(result));
-                var tokenUser = localStorage.getItem('currentUser');
-                this.user = JSON.parse(tokenUser);
-                this.router.navigate(['/user']);
+                this.userService.getUser()
+                    .subscribe(result => {
+                        console.log(result);
+                        localStorage.setItem('currentUser', JSON.stringify(result));
+                        var tokenUser = localStorage.getItem('currentUser');
+                        this.user = JSON.parse(tokenUser);
+                        this.router.navigate(['/user']);
+                    });
             });
     }
 
