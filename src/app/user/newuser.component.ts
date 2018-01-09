@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
-import { TextEqualityValidatorModule } from "ngx-text-equality-validator";
+import { TextEqualityValidatorModule } from 'ngx-text-equality-validator';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class NewuserComponent implements OnInit {
 
     constructor(
         private formBulder: FormBuilder,
-        private userService : UserService
+        private userService: UserService
     ) { }
 
     ngOnInit() {
@@ -40,7 +40,7 @@ export class NewuserComponent implements OnInit {
         this.street_ctrl = this.formBulder.control('', Validators.required);
         this.cp_ctrl = this.formBulder.control('', Validators.required);
         this.country_ctrl = this.formBulder.control('', Validators.required);
-        
+
 
         this.createUserForm = this.formBulder.group({
             username: this.username_ctrl,

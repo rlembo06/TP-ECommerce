@@ -4,7 +4,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
-import { TextEqualityValidatorModule } from "ngx-text-equality-validator";
+import { TextEqualityValidatorModule } from 'ngx-text-equality-validator';
 import { UserService } from '../../services/user.service';
 import { User } from '../../class/user';
 import { Router } from '@angular/router';
@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 
 })
 export class UserComponent implements OnInit {
-    
+
     public user: User;
 
     public id: number;
@@ -49,14 +49,14 @@ export class UserComponent implements OnInit {
         private router: Router,
         private formBulder: FormBuilder,
         private userService : UserService
-        
-    ) { 
+
+    ) {
         var token = localStorage.getItem('currentUser');
         this.user = JSON.parse(token);
     }
 
     ngOnInit() {
-        
+
         this.username = this.user.username;
         this.email = this.user.email;
         this.firstname = this.user.firstname;
@@ -65,7 +65,7 @@ export class UserComponent implements OnInit {
         this.street = this.user.street;
         this.cp = this.user.cp;
         this.country = this.user.country;
-        
+
         this.username_ctrl = this.formBulder.control(this.user.username);
         this.email_ctrl = this.formBulder.control(this.user.email);
         this.firstname_ctrl = this.formBulder.control(this.user.firstname);
@@ -104,7 +104,7 @@ export class UserComponent implements OnInit {
             .subscribe(result => {
                 alert(result);
             });
-        
+
         this.userService.getUser()
             .subscribe(result => {
                 localStorage.setItem('currentUser', JSON.stringify(result));
@@ -116,11 +116,11 @@ export class UserComponent implements OnInit {
 
     updatePassword() {
         console.log(this.updatePasswordForm.value);
-        
+
         this.userService.updatePassword(this.updatePasswordForm.value)
             .subscribe(result => {
                 alert(result);
             });
-        
+
     }
 }

@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
-
-var jwt = require('angular2-jwt-simple');
-//import jwt from 'angular2-jwt-simple';
+import * as jwt from 'angular2-jwt-simple';
 
 @Injectable()
 export class AuthentificationService {
@@ -30,7 +28,7 @@ export class AuthentificationService {
 
     login(username: string, password: string): Observable<boolean> {
 
-        var user = {
+        let user = {
 			username: username,
 			password: password
         };
@@ -46,7 +44,7 @@ export class AuthentificationService {
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(this.token));
-                    var tokenUser = localStorage.getItem('currentUser');
+                    let tokenUser = localStorage.getItem('currentUser');
 
                     return true;
                 } else {
