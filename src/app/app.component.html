@@ -31,15 +31,25 @@
 
 </nav>
 
-
 <!-- Page Content -->
 <div class="container content">
     <router-outlet></router-outlet>
 </div>
 
+
+
 <!-- Footer -->
-<footer>
+<footer class="container content">
+    <!--
     <div>
         <a class="nav-link" routerLink="/admin">Administration</a>
-    </div>
+    </div> 
+    -->
+    <app-login-admin></app-login-admin>
+
+    <div>
+        <p class="text-center">
+            <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">Administration</a>
+        </p>
+	</div>
 </footer>

@@ -12,7 +12,9 @@ import {LoginComponent} from '../login/login.component';
 import {UserComponent} from '../user/user.component';
 import {NewuserComponent} from '../user/newuser.component';
 import {PannierComponent} from '../pannier/pannier.component';
+
 import {AdminComponent} from '../admin/admin.component';
+import {LoginAdminComponent} from '../login-admin/login-admin.component';
 
 const routes: Routes = [
     { path: '', component: DashboardComponent},

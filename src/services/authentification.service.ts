@@ -40,8 +40,6 @@ export class AuthentificationService {
         return this.http.post(this.uri + "user/login", JSON.stringify(user), options)
             .map((response: Response) => {
 
-                //this.token = jwt.decode(response.text(), 'secret');
-
                 if (response.status === 200) {
                     this.token = jwt.decode(response.text(), 'secret');
 
@@ -51,7 +49,33 @@ export class AuthentificationService {
 
                     return true;
                 } else {
-                    //throw new Error('Connexion refusée !');
+                    return false;
+                }
+            });
+    }
+
+    loginAdmin(username: string, password: string): Observable<boolean> {
+
+        let user = {
+			username: username,
+			password: password
+        };
+
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.uri + "admin/login", JSON.stringify(user), options)
+            .map((response: Response) => {
+
+                if (response.status === 200 && username === "admin") {
+                    this.token = jwt.decode(response.text(), 'secret');
+
+                    // store username and jwt token in local storage to keep user logged in between page refreshes
+                    localStorage.setItem('currentUser', JSON.stringify(this.token));
+                    let tokenUser = localStorage.getItem('currentUser');
+
+                    return true;
+                } else {
                     return false;
                 }
             });
