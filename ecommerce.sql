@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Lun 08 Janvier 2018 à 23:26
+-- Généré le :  Mer 10 Janvier 2018 à 20:45
 -- Version du serveur :  10.1.26-MariaDB-0+deb9u1
--- Version de PHP :  7.0.19-1
+-- Version de PHP :  7.0.27-0+deb9u1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -130,6 +130,64 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `category`
+--
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `order`
+--
+
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `pannier`
+--
+
+CREATE TABLE `pannier` (
+  `id` int(11) NOT NULL,
+  `id_order` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `product`
+--
+
+CREATE TABLE `product` (
+  `id` int(11) NOT NULL,
+  `libelle` varchar(255) NOT NULL,
+  `photo` blob,
+  `description` text,
+  `price` double NOT NULL,
+  `id_category` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Contenu de la table `product`
+--
+
+INSERT INTO `product` (`id`, `libelle`, `photo`, `description`, `price`, `id_category`) VALUES
+(1, 'product', NULL, 'description', 1.2, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `user`
 --
 
@@ -151,18 +209,38 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `lastname`, `firstname`, `city`, `street`, `cp`, `country`) VALUES
-(2, 'test2', 'ad0234829205b9033196ba818f7a872b', 'test2', 'test2', 'test2', '', '', 0, ''),
-(3, 'test2', 'ad0234829205b9033196ba818f7a872b', 'test2', 'test2', 'test2', '', '', 0, ''),
-(4, 'test3', 'test3', 'test3@test3.fr', 'test3', 'test3', '', '', 0, ''),
-(6, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.fr', 'test', 'test', 'CITY', '12, STREET', 75000, 'FRANCE'),
 (8, 'username', '098f6bcd4621d373cade4e832627b4f6', 'email@test.fr', 'nom', 'préom', '', '', 0, ''),
-(10, 'rlembo', '7c6483ddcd99eb112c060ecbe0543e86', 'romainlembo06@gmail.com', 'Romain', 'LEMBO', 'Villeneuve-Loubet', '500, Avenue Bel Air', 6270, 'France'),
+(10, 'rlembo', '7c6483ddcd99eb112c060ecbe0543e86', 'romainlembo06@gmail.com', 'Lembo', 'Romain', 'Villeneuve-Loubet', '500, Avenue Bel Air', 6270, 'France'),
 (12, 'Cecile06', '098f6bcd4621d373cade4e832627b4f6', 'cecile.etourneau06@gmail.Com', 'Etourneau', 'Cécile', 'Villeneuve ', '55, Rue de ouf', 6270, 'France'),
 (13, 'Cecile066', '098f6bcd4621d373cade4e832627b4f6', 'cecile.etourneau06@gmail.Com6', 'Etourneau', 'Cécile', 'Villeneuve ', '55, Rue de ouf', 6270, 'France');
 
 --
 -- Index pour les tables exportées
 --
+
+--
+-- Index pour la table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `pannier`
+--
+ALTER TABLE `pannier`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `product`
+--
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `user`
@@ -175,10 +253,30 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `category`
+--
+ALTER TABLE `category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `pannier`
+--
+ALTER TABLE `pannier`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
