@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {}
 
-	login(username, password) {
+    login(username, password) {
 
 		this.authenticationService.login(username, password)
 			.subscribe(result => {
@@ -33,7 +33,9 @@ export class LoginComponent implements OnInit {
 				} else {
 					alert('Username or password is incorrect');
 				}
-			});
+            },
+            err => alert(err.text())
+        );
     }
 
     checkAuth(): boolean {

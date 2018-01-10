@@ -17,7 +17,6 @@ export class AuthentificationService {
 	constructor(
         private http: Http,
         private router: Router,
-        //public jwtHelper: JwtHelper
     )
     {
 		this.uri = "http://localhost:3000/";
@@ -30,7 +29,6 @@ export class AuthentificationService {
     
     login(username: string, password: string): Observable<boolean> {
 
-        //let jwtHelper: JwtHelper;
         let user = {
 			username: username,
 			password: password
@@ -42,9 +40,10 @@ export class AuthentificationService {
         return this.http.post(this.uri + "user/login", JSON.stringify(user), options)
             .map((response: Response) => {
 
-                this.token = jwt.decode(response.text(), 'secret');
+                //this.token = jwt.decode(response.text(), 'secret');
 
-                if (this.token) {
+                if (response.status === 200) {
+                    this.token = jwt.decode(response.text(), 'secret');
 
                     // store username and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(this.token));
@@ -52,6 +51,7 @@ export class AuthentificationService {
 
                     return true;
                 } else {
+                    //throw new Error('Connexion refusée !');
                     return false;
                 }
             });

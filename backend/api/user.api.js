@@ -14,6 +14,7 @@ app.get('/user/all', function (req, res) {
 
 });
 
+/*
 app.post('/user/login', function (req, res) {
     var data = req.body;
 
@@ -29,21 +30,22 @@ app.post('/user/login', function (req, res) {
         } else err;
 	});
 });
+*/
 
 app.post('/user/login', function (req, res) {
     var data = req.body;
 
 	user.Login(data, function (err, rows, fields) {
-
-		if (!err) {
-            //if (rows[0].result >= 1) res.json(true);
-            if (rows[0].result >= 1) res.json(true);
-			else {
-				res.json(false);
-				console.log('Errors :', false);
-			}
-		} else err;
-
+        var token;
+        if (!err) {
+            if(rows[0]) {
+                var user = JSON.stringify(rows[0]);
+                token = jwt.sign( user, 'secret');
+                res.send(token);
+            } 
+            else res.status(500).send("Connexion refusé !");
+            //else res.status(500).send("Connexion refusé !");
+        } else err;
 	});
 });
 
