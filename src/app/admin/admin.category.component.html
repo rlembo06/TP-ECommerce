@@ -52,4 +52,22 @@
         </form>
     </section><hr>
 
+    <section id="deleteCategory">
+            <h2>Supprimer une catégorie</h2>
+
+            <form (ngSubmit)="deleteCategory()" [formGroup]="deleteCategoryForm" class="form" role="form" #f="ngForm" novalidate>
+
+                <input type="hidden" value="" id="idCategoryDelete" name="id" formControlName="id" [(ngModel)]="idDelete" />
+
+                <ng-select
+                    [options]="categoriesUpdate"
+                    (selected)="onSelectedDelete($event)">
+                </ng-select>
+
+                <div class="form-group">
+                    <button type="submit" [disabled]="deleteCategoryForm.invalid" class="btn btn-primary btn-block">Supprimer</button>
+                </div>
+            </form>
+        </section><hr>
+
 </div>

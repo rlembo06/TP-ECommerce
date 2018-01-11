@@ -23,6 +23,9 @@ export class AdminCategoryComponent implements OnInit {
     public idUpdate: number;
     public libelleUpdate: string;
 
+    public idDelete: number;
+    public libelleDelete: string;
+
     public libelleCreate_ctrl: FormControl;
     public createCategoryForm: FormGroup;
 
@@ -30,6 +33,11 @@ export class AdminCategoryComponent implements OnInit {
     public libelleUpdate_ctrl: FormControl;
     public updateCategoryForm: FormGroup;
     public categoriesUpdate: Array<IOption>;
+
+    public idDelete_ctrl: FormControl;
+    public libelleDelete_ctrl: FormControl;
+    public deleteCategoryForm: FormGroup;
+    public categoriesDelete: Array<IOption>;
 
     constructor(
         private formBulder: FormBuilder,
@@ -55,7 +63,20 @@ export class AdminCategoryComponent implements OnInit {
                     }
                 });
 
+                this.categoriesDelete = this.categories.map(function(category){
+                    let categroyId = String(category.id);
+                    return {
+                        label: category.libelle,
+                        value: categroyId
+                    }
+                });
+
             });
+
+        this.deleteCategoryForm = this.formBulder.group({
+            libelle: this.libelleDelete,
+            id: this.idDelete
+        });
 
         this.updateCategoryForm = this.formBulder.group({
             libelle: this.libelleUpdate,
@@ -81,6 +102,16 @@ export class AdminCategoryComponent implements OnInit {
         this.idUpdate = +option.value;
     }
 
+    onSelectedDelete(option: IOption) {
+        this.libelleDelete_ctrl = this.formBulder.control(option.label);
+        this.libelleDelete = option.label;
+
+        this.idDelete_ctrl = this.formBulder.control(option.value);
+        this.idDelete = +option.value;
+
+        console.log('onSelectedDelete :', option);
+    }
+
     updateCategory() {
 
         console.log(this.updateCategoryForm.value);
@@ -90,6 +121,19 @@ export class AdminCategoryComponent implements OnInit {
                 alert(result);
                 location.reload(true);
             });
+    }
+
+    deleteCategory() {
+
+        console.log(this.deleteCategoryForm.value);
+
+        /*
+        this.adminService.updateCategory(this.updateCategoryForm.value)
+            .subscribe(result => {
+                alert(result);
+                location.reload(true);
+            });
+        */
     }
 
 
