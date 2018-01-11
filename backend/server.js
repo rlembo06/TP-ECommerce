@@ -14,17 +14,8 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/x-www-form-urlencoded
 
 // Import API Routes
-
-//http://expressjs.com/en/guide/routing.html
-/*
-app.use(function (req, res, next) {
-    res.use(require('./api/user.api'));
-    res.use(require('./api/admin.api'));
-    next();
-});
-*/
 app.use('/user', require('./api/user.api'));
-//app.use('/admin', require('./api/admin.api'));
+app.use('/admin', require('./api/admin.api'));
 
 port = process.env.PORT || 3000;
 app.listen(port, function () {

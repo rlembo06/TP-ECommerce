@@ -4,7 +4,7 @@ var app = express();
 
 var user = require('../models/user.model');
 
-app.get('/user/all', function (req, res) {
+app.get('/all', function (req, res) {
 
 	req.accepts('application/json');
 	user.All(function (err, rows, fields) {
@@ -14,7 +14,7 @@ app.get('/user/all', function (req, res) {
 
 });
 
-app.post('/user/login', function (req, res) {
+app.post('/login', function (req, res) {
     var data = req.body;
 
 	user.Login(data, function (err, rows, fields) {
@@ -24,13 +24,13 @@ app.post('/user/login', function (req, res) {
                 var user = JSON.stringify(rows[0]);
                 token = jwt.sign( user, 'secret');
                 res.send(token);
-            } 
+            }
             else res.status(500).send("Connexion refusé !");
         } else err;
 	});
 });
 
-app.post('/user', function (req, res) {
+app.post('/', function (req, res) {
     var data = req.body;
 
     req.accepts('application/json');
@@ -45,7 +45,7 @@ app.post('/user', function (req, res) {
 	});
 });
 
-app.put('/user/password', function (req, res) {
+app.put('/password', function (req, res) {
     var data = req.body;
 
     req.accepts('application/json');
@@ -60,7 +60,7 @@ app.put('/user/password', function (req, res) {
 	});
 });
 
-app.put('/user', function (req, res) {
+app.put('/', function (req, res) {
     var data = req.body;
 
     req.accepts('application/json');
@@ -70,7 +70,7 @@ app.put('/user', function (req, res) {
 	});
 });
 
-app.put('/user/delete', function (req, res) {
+app.put('/delete', function (req, res) {
     var data = req.body;
 
     req.accepts('application/json');
@@ -80,7 +80,7 @@ app.put('/user/delete', function (req, res) {
 	});
 });
 
-app.post('/user/get', function (req, res) {
+app.post('/get', function (req, res) {
     var data = req.body;
 
     req.accepts('application/json');
