@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../../class/category';
 import { FormControl, FormGroup, FormBuilder, Validators, Validator } from '@angular/forms';
+import { AdminService } from '../../services/admin.service';
 
 @Component({
   selector: 'app-admin-category',
   templateUrl: './admin.category.component.html',
+  providers: [AdminService]
 })
 export class AdminCategoryComponent implements OnInit {
 
@@ -17,7 +19,8 @@ export class AdminCategoryComponent implements OnInit {
     public createCategoryForm: FormGroup;
 
     constructor(
-        private formBulder: FormBuilder
+        private formBulder: FormBuilder,
+        private adminService: AdminService
     ) { }
 
     ngOnInit() {
@@ -30,12 +33,11 @@ export class AdminCategoryComponent implements OnInit {
 
     createCategory() {
         console.log(this.createCategoryForm.value);
+        this.category = this.createCategoryForm.value;
 
-        /*
-        this.userService.createUser(this.createUserForm.value)
+        this.adminService.createCategory(this.category)
             .subscribe(result => {
                 alert(result);
             });
-        */
     }
 }
