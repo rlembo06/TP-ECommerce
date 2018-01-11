@@ -19,4 +19,14 @@ module.exports.AllCategories = function (callback) {
     })
 }
 
+
+module.exports.UpdateCategory = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query(
+            'SELECT updateCategory('+ data.id +', \"'+ data.libelle +'\")'
+        , callback);
+    })
+}
+
 /* ---------------------------------- */

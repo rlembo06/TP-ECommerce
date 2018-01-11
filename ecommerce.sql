@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Client :  localhost:3306
--- Généré le :  Mer 10 Janvier 2018 à 20:45
--- Version du serveur :  10.1.26-MariaDB-0+deb9u1
--- Version de PHP :  7.0.27-0+deb9u1
+-- Hôte : 127.0.0.1
+-- Généré le :  jeu. 11 jan. 2018 à 18:15
+-- Version du serveur :  5.7.17
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -71,6 +73,26 @@ END$$
 --
 -- Fonctions
 --
+CREATE DEFINER=`root`@`localhost` FUNCTION `createCategory` (`_libelle` VARCHAR(255)) RETURNS TEXT CHARSET latin1 READS SQL DATA
+BEGIN
+	DECLARE response TEXT;
+	DECLARE existCategory INT;
+
+	SET existCategory := (SELECT COUNT(*) FROM category WHERE libelle = _libelle);
+
+	IF (existCategory > 0) THEN
+		SET response := "Cette catégorie existe déjà.";
+	END IF;
+
+	IF (existCategory = 0) THEN
+		INSERT INTO category(libelle) VALUES(_libelle) ;
+		
+		SET response:= "Catégorie ajouté !";
+	END IF;
+
+	return response;
+END$$
+
 CREATE DEFINER=`root`@`localhost` FUNCTION `createUser` (`_username` VARCHAR(255), `_password` VARCHAR(255), `_email` VARCHAR(255), `_lastname` VARCHAR(255), `_firstname` VARCHAR(255), `_city` VARCHAR(255), `_street` VARCHAR(255), `_cp` INTEGER(5), `_country` VARCHAR(255)) RETURNS TEXT CHARSET utf8mb4 READS SQL DATA
 BEGIN
 	DECLARE response TEXT;
@@ -99,6 +121,28 @@ BEGIN
 		SET response:= "Profil ajouté !";
 	END IF;
 
+	return response;
+END$$
+
+CREATE DEFINER=`root`@`localhost` FUNCTION `updateCategory` (`_id` INT, `_libelle` VARCHAR(255)) RETURNS TEXT CHARSET latin1 READS SQL DATA
+BEGIN
+	DECLARE response TEXT;
+	DECLARE existCategory INT;
+	
+	SET existCategory := (SELECT COUNT(*) FROM category WHERE libelle = _libelle);
+	
+	IF (existCategory > 0) THEN
+		SET response := "Cette catégorie existe déjà.";
+	END IF;
+	
+	IF (_libelle != NULL OR _libelle != '' && existCategory = 0) THEN
+		UPDATE category 
+		SET libelle = _libelle 
+		WHERE id = _id;
+		
+		SET response := "Catégorie modifié.";
+	END IF;
+	
 	return response;
 END$$
 
@@ -137,6 +181,14 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `libelle` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `category`
+--
+
+INSERT INTO `category` (`id`, `libelle`) VALUES
+(1, 'CATEGORIE1'),
+(2, 'cat2');
 
 -- --------------------------------------------------------
 
@@ -179,7 +231,7 @@ CREATE TABLE `product` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Contenu de la table `product`
+-- Déchargement des données de la table `product`
 --
 
 INSERT INTO `product` (`id`, `libelle`, `photo`, `description`, `price`, `id_category`) VALUES
@@ -205,17 +257,18 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Contenu de la table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `email`, `lastname`, `firstname`, `city`, `street`, `cp`, `country`) VALUES
 (8, 'username', '098f6bcd4621d373cade4e832627b4f6', 'email@test.fr', 'nom', 'préom', '', '', 0, ''),
 (10, 'rlembo', '7c6483ddcd99eb112c060ecbe0543e86', 'romainlembo06@gmail.com', 'Lembo', 'Romain', 'Villeneuve-Loubet', '500, Avenue Bel Air', 6270, 'France'),
 (12, 'Cecile06', '098f6bcd4621d373cade4e832627b4f6', 'cecile.etourneau06@gmail.Com', 'Etourneau', 'Cécile', 'Villeneuve ', '55, Rue de ouf', 6270, 'France'),
-(13, 'Cecile066', '098f6bcd4621d373cade4e832627b4f6', 'cecile.etourneau06@gmail.Com6', 'Etourneau', 'Cécile', 'Villeneuve ', '55, Rue de ouf', 6270, 'France');
+(13, 'Cecile066', '098f6bcd4621d373cade4e832627b4f6', 'cecile.etourneau06@gmail.Com6', 'Etourneau', 'Cécile', 'Villeneuve ', '55, Rue de ouf', 6270, 'France'),
+(14, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'romainlembo.mail@gmail.com', 'Romain', 'Lembo', 'Villeneuve-Loubet', '500, Avenue Bel Air', 6270, 'France');
 
 --
--- Index pour les tables exportées
+-- Index pour les tables déchargées
 --
 
 --
@@ -249,14 +302,14 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
 -- AUTO_INCREMENT pour la table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `order`
 --
@@ -276,7 +329,8 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

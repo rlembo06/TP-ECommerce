@@ -30,9 +30,11 @@
 
         <form (ngSubmit)="updateCategory()" [formGroup]="updateCategoryForm" class="form" role="form" #f="ngForm" novalidate>
 
+            <input type="hidden" value="" id="idCategoryUpdate" name="id" formControlName="id" [(ngModel)]="idUpdate" />
+
             <ng-select
                 [options]="categoriesUpdate"
-                (selected)="onSelected($event)">
+                (selected)="onSelectedUpdate($event)">
             </ng-select>
 
             <div class="form-group">

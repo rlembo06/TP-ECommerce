@@ -73,14 +73,23 @@ export class AdminCategoryComponent implements OnInit {
             });
     }
 
-    onSelected(option: IOption) {
+    onSelectedUpdate(option: IOption) {
         this.libelleUpdate_ctrl = this.formBulder.control(option.label);
         this.libelleUpdate = option.label;
 
         this.idUpdate_ctrl = this.formBulder.control(option.value);
         this.idUpdate = +option.value;
+    }
 
-        console.log(option);
+    updateCategory() {
+
+        console.log(this.updateCategoryForm.value);
+
+        this.adminService.updateCategory(this.updateCategoryForm.value)
+            .subscribe(result => {
+                alert(result);
+                location.reload(true);
+            });
     }
 
 

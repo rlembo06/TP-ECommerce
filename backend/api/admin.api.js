@@ -56,6 +56,21 @@ app.get('/category/all', function (req, res) {
 
 });
 
+app.put('/category', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	admin.UpdateCategory(data, function (err, rows, fields) {
+        if (!err)
+        {
+            for (var key in rows[0]) {
+                res.send(rows[0][key]);
+            }
+        }
+		else console.log(err);
+	});
+});
+
 /* ---------------------------------- */
 
 

@@ -37,13 +37,14 @@ export class AdminService {
             });
     }
 
-    getCategoriesOption(): Observable<Array<IOption>> {
+    updateCategory(category: Category): Observable<string> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
 
-        let user = localStorage.getItem('currentUser');
-        return this.http.get(this.uri + "admin/category/all")
+        return this.http.put(this.uri + "admin/category", JSON.stringify(category), options)
             .map((response: Response) => {
-                let result = response.text();
-                return JSON.parse(result);
+                console.log(response.text());
+                return response.text();
             });
     }
 
