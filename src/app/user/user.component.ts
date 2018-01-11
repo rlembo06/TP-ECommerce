@@ -18,7 +18,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 })
 export class UserComponent implements OnInit {
-    
+
 
     public user: User;
 
@@ -51,10 +51,10 @@ export class UserComponent implements OnInit {
     constructor(
         private router: Router,
         private formBulder: FormBuilder,
-        private userService : UserService
+        private userService: UserService
 
     ) {
-        var token = localStorage.getItem('currentUser');
+        let token = localStorage.getItem('currentUser');
         this.user = JSON.parse(token);
     }
 
@@ -111,7 +111,7 @@ export class UserComponent implements OnInit {
                     .subscribe(result => {
                         console.log(result);
                         localStorage.setItem('currentUser', JSON.stringify(result));
-                        var tokenUser = localStorage.getItem('currentUser');
+                        let tokenUser = localStorage.getItem('currentUser');
                         this.user = JSON.parse(tokenUser);
                         this.router.navigate(['/user']);
                     });

@@ -1,5 +1,5 @@
 /**
- * Explication Guard & Route : 
+ * Explication Guard & Route :
  * https://medium.com/@simonb90/activer-d%C3%A9sactiver-des-routes-dynamiquement-avec-angular-5817c4276322
  * https://angular-2-training-book.rangle.io/handout/routing/route_guards.html
  */

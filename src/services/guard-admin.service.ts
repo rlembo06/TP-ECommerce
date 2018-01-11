@@ -1,16 +1,19 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Router, CanActivate} from '@angular/router';
 
 @Injectable()
 export class GuardAdminService implements CanActivate {
 
     constructor(private router: Router) { }
 
-    canActivate(
-        next: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        return true;
+    canActivate() {
+        if (localStorage.getItem('currentAdmin')) {
+            // logged in so return true
+            return true;
+        }
+
+        // not logged in so redirect to login page
+        this.router.navigate(['/']);
+        return false;
     }
 }
-

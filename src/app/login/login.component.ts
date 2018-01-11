@@ -30,14 +30,14 @@ export class LoginComponent implements OnInit {
                 console.log(result);
 				if (result === true) {
 					this.router.navigate(['/']);
-				} 
+				}
             },
             err => alert(err.text())
         );
     }
 
     checkAuth(): boolean {
-        var tokenUser = localStorage.getItem('currentUser');
+        let tokenUser = localStorage.getItem('currentUser');
 
         if (tokenUser !== null) {
             return true;

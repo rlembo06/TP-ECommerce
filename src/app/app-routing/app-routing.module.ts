@@ -6,6 +6,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {GuardService} from '../../services/guard.service';
+import {GuardAdminService} from '../../services/guard-admin.service';
 
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {LoginComponent} from '../login/login.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
     { path: '', component: DashboardComponent},
     { path: 'newuser', component: NewuserComponent },
 
-    { path: 'admin', component: AdminComponent },
+    { path: 'admin', component: AdminComponent, canActivate: [GuardAdminService] },
 
     { path: 'user', component: UserComponent, canActivate: [GuardService] },
     { path: 'pannier', component: PannierComponent, canActivate: [GuardService] },

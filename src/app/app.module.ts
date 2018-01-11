@@ -15,6 +15,7 @@ import {LoginComponent} from './login/login.component';
 
 import {AuthentificationService} from '../services/authentification.service';
 import {GuardService} from '../services/guard.service';
+import {GuardAdminService} from '../services/guard-admin.service';
 import {UserService} from '../services/user.service';
 
 import { UserComponent } from './user/user.component';
@@ -48,6 +49,7 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
     providers: [
         AuthentificationService,
         GuardService,
+        GuardAdminService,
         UserService
     ],
     bootstrap: [AppComponent]
