@@ -46,6 +46,38 @@ app.post('/category/create', function (req, res) {
 	});
 });
 
+app.get('/category/all', function (req, res) {
+
+	req.accepts('application/json');
+	admin.AllCategories(function (err, rows, fields) {
+		if (!err) res.json(rows);
+		else console.log(err);
+	});
+
+});
+
+/*
+app.get('/category/options', function (req, res) {
+
+	req.accepts('application/json');
+	admin.AllCategories(function (err, rows, fields) {
+		if (!err) {
+
+            var options;
+            rows.forEach(function(category) {
+                options['label'] = category['libelle'];
+                options['value'] = category['libelle'];
+            });
+
+            console.log( options.json() );
+            res.json(options);
+        }
+		else console.log(err);
+	});
+
+});
+*/
+
 /* ---------------------------------- */
 
 

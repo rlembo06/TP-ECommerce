@@ -12,4 +12,11 @@ module.exports.CreateCategory = function (data, callback) {
     });
 }
 
+module.exports.AllCategories = function (callback) {
+    database.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query('SELECT * FROM category', callback);
+    })
+}
+
 /* ---------------------------------- */

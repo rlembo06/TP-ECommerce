@@ -1,31 +1,54 @@
-<div id="admin">
 
-    <div id="category">
-        <h1>Categorie</h1>
-        <hr>
+<div id="category">
+    <h1>Categorie</h1>
+    <hr>
 
-        <section id="createCategory">
-            <h2>Créer une catégorie</h2>
+    <section id="createCategory">
+        <h2>Créer une catégorie</h2>
 
-            <form (ngSubmit)="createCategory()" [formGroup]="createCategoryForm" class="form" role="form" #f="ngForm" novalidate>
+        <form (ngSubmit)="createCategory()" [formGroup]="createCategoryForm" class="form" role="form" #f="ngForm" novalidate>
 
-                <div class="form-group">
-                    <input id="libelleCategory" name="libelle"
-                    formControlName="libelle" formControlName="libelle"
-                    placeholder="Libelle"
-                    class="form-control form-control-sm"
-                    type="text"
-                    required>
-                </div>
+            <div class="form-group">
+                <input id="libelleCategoryCreate" name="libelle"
+                formControlName="libelle" formControlName="libelle"
+                placeholder="Libelle"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
 
-                <div class="form-group">
-                    <button type="submit" [disabled]="createCategoryForm.invalid" class="btn btn-primary btn-block">Créer</button>
-                </div>
+            <div class="form-group">
+                <button type="submit" [disabled]="createCategoryForm.invalid" class="btn btn-primary btn-block">Créer</button>
+            </div>
 
-            </form>
+        </form>
 
-        </section><hr>
+    </section><hr>
 
-    </div>
+    <section id="createCategory">
+        <h2>Modifier une catégorie</h2>
+
+        <form (ngSubmit)="updateCategory()" [formGroup]="updateCategoryForm" class="form" role="form" #f="ngForm" novalidate>
+
+            <ng-select
+                formControlName="categoriesUpdate"
+                [options]="categoriesUpdate">
+            </ng-select>
+
+            <div class="form-group">
+                <input id="libelleCategoryUpdate" name="libelle"
+                formControlName="libelle" formControlName="libelle"
+                placeholder="Libelle"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="updateCategoryForm.invalid" class="btn btn-primary btn-block">Modifier</button>
+            </div>
+
+        </form>
+    </section><hr>
 
 </div>

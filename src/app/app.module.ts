@@ -8,6 +8,7 @@ import { HttpModule, JsonpModule, Http, RequestOptions } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { SelectModule } from 'ng-select';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -36,6 +37,7 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
         FormsModule,
         HttpModule,
         JsonpModule,
+        SelectModule,
         ConfirmationPopoverModule.forRoot({
             focusButton: 'confirm'
         })

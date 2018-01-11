@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Category } from '../class/category';
+import { IOption } from 'ng-select';
 
 @Injectable()
 export class AdminService {
@@ -23,6 +24,26 @@ export class AdminService {
             .map((response: Response) => {
                 console.log(response.text());
                 return response.text();
+            });
+    }
+
+    getCategories(): Observable<Array<Category>> {
+
+        let user = localStorage.getItem('currentUser');
+        return this.http.get(this.uri + "admin/category/all")
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
+            });
+    }
+
+    getCategoriesOption(): Observable<Array<IOption>> {
+
+        let user = localStorage.getItem('currentUser');
+        return this.http.get(this.uri + "admin/category/all")
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
             });
     }
 
