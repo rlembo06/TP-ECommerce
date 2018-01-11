@@ -34,7 +34,7 @@ export class NewuserComponent implements OnInit {
         this.email_ctrl = this.formBulder.control('', Validators.required);
         this.firstname_ctrl = this.formBulder.control('', Validators.required);
         this.lastname_ctrl = this.formBulder.control('', Validators.required);
-        this.password_ctrl = this.formBulder.control('', Validators.required)
+        this.password_ctrl = this.formBulder.control('', Validators.required);
         this.confirmPassword_ctrl = this.formBulder.control('', Validators.required);
         this.city_ctrl = this.formBulder.control('', Validators.required);
         this.street_ctrl = this.formBulder.control('', Validators.required);

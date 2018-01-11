@@ -45,17 +45,20 @@
         <a class="nav-link" routerLink="/admin">Administration</a>
     </div>
     -->
-    <app-login-admin></app-login-admin>
+    <app-login-admin *ngIf="!checkAuthAdmin()"></app-login-admin>
 
     <div *ngIf="!checkAuthAdmin()">
         <p class="text-center">
-            <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">Administration</a>
+            <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">Connexion administration</a>
         </p>
     </div>
 
-    <div *ngIf="checkAuthAdmin()" (click)="logoutAdmin()">
+    <div *ngIf="checkAuthAdmin()">
         <p class="text-center">
-            <a href="#" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">Déconnexion administration</a>
+            <a href="#" (click)="logoutAdmin()" class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#login-modal">Déconnexion administration</a>
+        </p>
+        <p class="text-center">
+            <a  routerLink="/admin" class="btn btn-primary btn-lg" role="button">Administration</a>
         </p>
 	</div>
 </footer>

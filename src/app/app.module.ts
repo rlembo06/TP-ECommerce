@@ -17,12 +17,16 @@ import {AuthentificationService} from '../services/authentification.service';
 import {GuardService} from '../services/guard.service';
 import {GuardAdminService} from '../services/guard-admin.service';
 import {UserService} from '../services/user.service';
+import {AdminService} from '../services/admin.service';
 
 import { UserComponent } from './user/user.component';
 import { NewuserComponent } from './user/newuser.component';
 import { PannierComponent } from './pannier/pannier.component';
+
 import { AdminComponent } from './admin/admin.component';
+import { AdminCategoryComponent } from './admin/admin.category.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
+
 
 @NgModule({
     imports: [
@@ -44,13 +48,15 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
         NewuserComponent,
         PannierComponent,
         AdminComponent,
+        AdminCategoryComponent,
         LoginAdminComponent
     ],
     providers: [
         AuthentificationService,
         GuardService,
         GuardAdminService,
-        UserService
+        UserService,
+        AdminService
     ],
     bootstrap: [AppComponent]
 })

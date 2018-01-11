@@ -43,10 +43,20 @@ export class LoginAdminComponent implements OnInit {
             .subscribe(result => {
                 console.log(result);
                 if (result === true) {
-                    this.router.navigate(['/admin']);
+                    location.reload(true);
                 }
             },
             err => alert(err.text())
         );
+    }
+
+    checkAuthAdmin(): boolean {
+        let tokenUser = localStorage.getItem('currentAdmin');
+
+        if (tokenUser !== null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
