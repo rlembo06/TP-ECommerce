@@ -109,7 +109,6 @@ export class UserComponent implements OnInit {
 
                 this.userService.getUser()
                     .subscribe(result => {
-                        console.log(result);
                         localStorage.setItem('currentUser', JSON.stringify(result));
                         let tokenUser = localStorage.getItem('currentUser');
                         this.user = JSON.parse(tokenUser);

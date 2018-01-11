@@ -20,12 +20,13 @@ export class AdminCategoryComponent implements OnInit {
     public category: Category;
     public categories: Array<Category>;
 
-    public id: number;
-    public libelle: string;
+    public idUpdate: number;
+    public libelleUpdate: string;
 
     public libelleCreate_ctrl: FormControl;
     public createCategoryForm: FormGroup;
 
+    public idUpdate_ctrl: FormControl;
     public libelleUpdate_ctrl: FormControl;
     public updateCategoryForm: FormGroup;
     public categoriesUpdate: Array<IOption>;
@@ -45,19 +46,20 @@ export class AdminCategoryComponent implements OnInit {
         this.adminService.getCategories()
             .subscribe(result => {
                 this.categories = result;
-                console.log(this.categories);
 
                 this.categoriesUpdate = this.categories.map(function(category){
+                    let categroyId = String(category.id);
                     return {
                         label: category.libelle,
-                        value: category.libelle
+                        value: categroyId
                     }
                 });
 
             });
 
         this.updateCategoryForm = this.formBulder.group({
-            libelle: new FormControl()
+            libelle: this.libelleUpdate,
+            id: this.idUpdate
         });
     }
 
@@ -69,6 +71,16 @@ export class AdminCategoryComponent implements OnInit {
             .subscribe(result => {
                 alert(result);
             });
+    }
+
+    onSelected(option: IOption) {
+        this.libelleUpdate_ctrl = this.formBulder.control(option.label);
+        this.libelleUpdate = option.label;
+
+        this.idUpdate_ctrl = this.formBulder.control(option.value);
+        this.idUpdate = +option.value;
+
+        console.log(option);
     }
 
 

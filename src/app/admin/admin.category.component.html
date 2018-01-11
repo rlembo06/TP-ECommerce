@@ -31,13 +31,12 @@
         <form (ngSubmit)="updateCategory()" [formGroup]="updateCategoryForm" class="form" role="form" #f="ngForm" novalidate>
 
             <ng-select
-                formControlName="categoriesUpdate"
-                [options]="categoriesUpdate">
+                [options]="categoriesUpdate"
+                (selected)="onSelected($event)">
             </ng-select>
 
             <div class="form-group">
-                <input id="libelleCategoryUpdate" name="libelle"
-                formControlName="libelle" formControlName="libelle"
+                <input id="libelleCategoryUpdate" name="libelle" formControlName="libelle" [(ngModel)]="libelleUpdate"
                 placeholder="Libelle"
                 class="form-control form-control-sm"
                 type="text"
