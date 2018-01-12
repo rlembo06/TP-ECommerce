@@ -9,6 +9,7 @@ import { HttpModule, JsonpModule, Http, RequestOptions } from '@angular/http';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { SelectModule } from 'ng-select';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import {AppComponent} from './app.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
@@ -26,6 +27,7 @@ import { PannierComponent } from './pannier/pannier.component';
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminCategoryComponent } from './admin/admin.category.component';
+import { AdminProductComponent } from './admin/admin.product.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 
 
@@ -38,6 +40,7 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
         HttpModule,
         JsonpModule,
         SelectModule,
+        FileUploadModule,
         ConfirmationPopoverModule.forRoot({
             focusButton: 'confirm'
         })
@@ -51,6 +54,7 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
         PannierComponent,
         AdminComponent,
         AdminCategoryComponent,
+        AdminProductComponent,
         LoginAdminComponent
     ],
     providers: [

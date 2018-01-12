@@ -1,0 +1,105 @@
+
+<div id="product">
+    <h1>Produit</h1>
+    <hr>
+
+    <section id="createProduct">
+        <h2>Créer un produit</h2>
+
+        <form (ngSubmit)="createProduct()" [formGroup]="createProductForm" class="form" role="form" #f="ngForm" novalidate>
+
+            <div class="form-group">
+                <input id="libelleProductCreate" name="libelle"
+                formControlName="libelle" formControlName="libelle"
+                placeholder="Libelle"
+                class="form-control form-control-sm"
+                type="text"
+                required/>
+            </div>
+
+            <div class="form-group">
+                <input id="photoProductCreate" name="photo"
+                formControlName="photo" formControlName="photo"
+                class="form-control form-control-sm"
+                type="file"
+                required/>
+            </div>
+
+            <div class="form-group">
+                <textarea id="descritionProductCreate" name="descrition"
+                formControlName="descrition" formControlName="descrition"
+                placeholder="Description"
+                class="form-control form-control-sm"
+                required>
+                </textarea>
+            </div>
+
+            <div class="form-group">
+                <input id="priceProductCreate" name="price"
+                formControlName="price" formControlName="price"
+                placeholder="Prix"
+                class="form-control form-control-sm"
+                type="number"
+                required/>
+            </div>
+
+            <ng-select
+                placeholder="Choix de la catégorie"
+                [options]="categoriesCreate"
+                (selected)="onSelectedUpdate($event)">
+            </ng-select>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="createProductForm.invalid" class="btn btn-primary btn-block">Créer</button>
+            </div>
+
+        </form>
+
+    </section><hr>
+
+    <section id="createProduct">
+        <h2>Modifier un produit</h2>
+
+        <form (ngSubmit)="updateProduct()" [formGroup]="updateProductForm" class="form" role="form" #f="ngForm" novalidate>
+
+            <input type="hidden" value="" id="idProductUpdate" name="id" formControlName="id" [(ngModel)]="idUpdate" />
+
+            <ng-select
+                [options]="categoriesUpdate"
+                (selected)="onSelectedUpdate($event)">
+            </ng-select>
+
+            <div class="form-group">
+                <input id="libelleProductUpdate" name="libelle" formControlName="libelle" [(ngModel)]="libelleUpdate"
+                placeholder="Libelle"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="updateProductForm.invalid" class="btn btn-primary btn-block">Modifier</button>
+            </div>
+
+        </form>
+    </section><hr>
+
+    <section id="deleteProduct">
+            <h2>Supprimer un produit</h2>
+
+            <form (ngSubmit)="deleteProduct()" [formGroup]="deleteProductForm" class="form" role="form" #f="ngForm" novalidate>
+
+                <input type="hidden" value="" id="idProductDelete" name="id" formControlName="id" [(ngModel)]="idDelete" />
+
+                <ng-select
+                    [options]="categoriesDelete"
+                    (selected)="onSelectedDelete($event)">
+                </ng-select>
+
+                <div class="form-group">
+                    <button type="submit" [disabled]="deleteProductForm.invalid" class="btn btn-primary btn-block">Supprimer</button>
+                </div>
+            </form>
+        </section><hr>
+
+</div>
