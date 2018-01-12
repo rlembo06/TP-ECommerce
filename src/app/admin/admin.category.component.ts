@@ -9,6 +9,8 @@ import { AdminService } from '../../services/admin.service';
 import { SelectModule } from 'ng-select';
 import { IOption } from 'ng-select';
 import { forEach } from '@angular/router/src/utils/collection';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-admin-category',
@@ -40,6 +42,7 @@ export class AdminCategoryComponent implements OnInit {
     public categoriesDelete: Array<IOption>;
 
     constructor(
+        private router: Router,
         private formBulder: FormBuilder,
         private adminService: AdminService
     ) { }
@@ -91,6 +94,7 @@ export class AdminCategoryComponent implements OnInit {
         this.adminService.createCategory(this.category)
             .subscribe(result => {
                 alert(result);
+                location.reload(true);
             });
     }
 
@@ -127,13 +131,11 @@ export class AdminCategoryComponent implements OnInit {
 
         console.log(this.deleteCategoryForm.value);
 
-        /*
-        this.adminService.updateCategory(this.updateCategoryForm.value)
+        this.adminService.deleteCategory(this.deleteCategoryForm.value)
             .subscribe(result => {
                 alert(result);
                 location.reload(true);
             });
-        */
     }
 
 

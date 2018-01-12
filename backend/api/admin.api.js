@@ -71,6 +71,16 @@ app.put('/category', function (req, res) {
 	});
 });
 
+app.put('/category/delete', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	admin.DeleteCategory(data, function (err, rows, fields) {
+        if (!err) res.send("Categorie supprimé !");
+		else res.send("Echec de la suppression de la catégorie !");
+	});
+});
+
 /* ---------------------------------- */
 
 

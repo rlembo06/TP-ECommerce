@@ -29,4 +29,9 @@ module.exports.UpdateCategory = function (data, callback) {
     })
 }
 
+module.exports.DeleteCategory = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query('DELETE FROM category WHERE id = '+ data.id, callback);
+    });
+}
 /* ---------------------------------- */
