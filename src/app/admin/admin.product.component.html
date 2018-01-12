@@ -6,7 +6,7 @@
     <section id="createProduct">
         <h2>Créer un produit</h2>
 
-        <form (ngSubmit)="createProduct()" [formGroup]="createProductForm" class="form" role="form" #f="ngForm" novalidate>
+        <form (ngSubmit)="createProduct()" [formGroup]="createProductForm" class="form" role="form" #f="ngForm" novalidate enctype="multipart/form-data">
 
             <div class="form-group">
                 <input id="libelleProductCreate" name="libelle"
@@ -18,11 +18,10 @@
             </div>
 
             <div class="form-group">
-                <input id="photoProductCreate" name="photo"
-                formControlName="photo" formControlName="photo"
+                <input 
+                id="photoProductCreate" name="photo" formControlName="photo"
                 class="form-control form-control-sm"
-                type="file"
-                required/>
+                type="file" accept="image/*" (change)="handleUploader($event)">
             </div>
 
             <div class="form-group">
@@ -60,7 +59,7 @@
     <section id="createProduct">
         <h2>Modifier un produit</h2>
 
-        <form (ngSubmit)="updateProduct()" [formGroup]="updateProductForm" class="form" role="form" #f="ngForm" novalidate>
+        <form (ngSubmit)="updateProduct()" [formGroup]="updateProductForm" class="form" role="form" #f="ngForm" novalidate enctype="multipart/form-data">
 
             <input type="hidden" value="" id="idProductUpdate" name="id" formControlName="id" [(ngModel)]="idUpdate" />
 
@@ -85,21 +84,21 @@
     </section><hr>
 
     <section id="deleteProduct">
-            <h2>Supprimer un produit</h2>
+        <h2>Supprimer un produit</h2>
 
-            <form (ngSubmit)="deleteProduct()" [formGroup]="deleteProductForm" class="form" role="form" #f="ngForm" novalidate>
+        <form (ngSubmit)="deleteProduct()" [formGroup]="deleteProductForm" class="form" role="form" #f="ngForm" novalidate>
 
-                <input type="hidden" value="" id="idProductDelete" name="id" formControlName="id" [(ngModel)]="idDelete" />
+            <input type="hidden" value="" id="idProductDelete" name="id" formControlName="id" [(ngModel)]="idDelete" />
 
-                <ng-select
-                    [options]="categoriesDelete"
-                    (selected)="onSelectedDelete($event)">
-                </ng-select>
+            <ng-select
+                [options]="categoriesDelete"
+                (selected)="onSelectedDelete($event)">
+            </ng-select>
 
-                <div class="form-group">
-                    <button type="submit" [disabled]="deleteProductForm.invalid" class="btn btn-primary btn-block">Supprimer</button>
-                </div>
-            </form>
-        </section><hr>
+            <div class="form-group">
+                <button type="submit" [disabled]="deleteProductForm.invalid" class="btn btn-primary btn-block">Supprimer</button>
+            </div>
+        </form>
+    </section><hr>
 
 </div>

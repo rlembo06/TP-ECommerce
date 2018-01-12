@@ -1,5 +1,6 @@
 /*
  * https://www.npmjs.com/package/angular2-select-of
+ * https://valor-software.com/ng2-file-upload/
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -11,8 +12,6 @@ import { SelectModule } from 'ng-select';
 import { IOption } from 'ng-select';
 import { forEach } from '@angular/router/src/utils/collection';
 import { Router } from '@angular/router';
-import { FileUploader } from 'ng2-file-upload';
-
 
 @Component({
   selector: 'app-admin-product',
@@ -20,6 +19,8 @@ import { FileUploader } from 'ng2-file-upload';
   providers: [AdminService]
 })
 export class AdminProductComponent implements OnInit {
+
+    public uploader: any;
 
     public product: Product;
     public products: Array<Product>;
@@ -57,16 +58,17 @@ export class AdminProductComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.libelleCreate_ctrl = this.formBulder.control('', Validators.required);
-        this.photoCreate_ctrl = this.formBulder.control('', Validators.required);
-        this.descritionCreate_ctrl = this.formBulder.control('', Validators.required);
-        this.priceCreate_ctrl = this.formBulder.control('', Validators.required);
+        this.libelleCreate_ctrl = this.formBulder.control('');
+        //this.photoCreate_ctrl = this.formBulder.control(this.uploader);
+        this.descritionCreate_ctrl = this.formBulder.control('');
+        this.priceCreate_ctrl = this.formBulder.control('');
 
         this.createProductForm = this.formBulder.group({
             libelle: this.libelleCreate_ctrl,
-            photo: this.photoCreate_ctrl,
+            photo: this.uploader,
             descrition: this.descritionCreate_ctrl,
-            price: this.priceCreate_ctrl
+            price: this.priceCreate_ctrl,
+            id_category: ''
         });
 
         this.adminService.getCategories()
@@ -112,6 +114,22 @@ export class AdminProductComponent implements OnInit {
 
     createProduct() {
         console.log(this.createProductForm.value);
+        console.log(this.uploader);
+    }
+
+    handleUploader($event) : void {
+        this.handleDataURI($event.target);
+    }
+      
+    handleDataURI(inputValue: any): void {
+        var file:File = inputValue.files[0];
+        var myReader:FileReader = new FileReader();
+      
+        myReader.onloadend = (e) => {
+            this.uploader = myReader.result;
+            console.log(this.uploader);
+        }
+        myReader.readAsDataURL(file);
     }
 
     onSelectedUpdate(option: IOption) {
