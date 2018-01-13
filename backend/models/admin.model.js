@@ -35,3 +35,17 @@ module.exports.DeleteCategory = function (data, callback) {
     });
 }
 /* ---------------------------------- */
+
+/* ---------------------------------- */
+/* Product handle */
+
+module.exports.CreateProduct = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query(
+              'INSERT INTO product (libelle, photo, description, price, id_category)'
+            + 'VALUES (\"'+ data.libelle +'\", \"'+ data.photo +'\", \"'+ data.description +'\", '+ data.price +', '+ data.id_category +')'
+        , callback);
+    });
+}
+
+/* ---------------------------------- */

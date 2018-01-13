@@ -83,5 +83,20 @@ app.put('/category/delete', function (req, res) {
 
 /* ---------------------------------- */
 
+/* ---------------------------------- */
+/* Product handle */
+
+app.post('/product/create', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	admin.CreateProduct(data, function (err, rows, fields) {
+        if (!err) res.send("Produit ajouté !");
+		else res.send("Echec de la création du produit !");
+	});
+});
+
+/* ---------------------------------- */
+
 
 module.exports = app;

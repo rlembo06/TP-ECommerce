@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Category } from '../class/category';
 import { IOption } from 'ng-select';
+import { Category } from '../class/category';
+import { Product } from '../class/product';
 
 @Injectable()
 export class AdminService {
@@ -21,6 +22,17 @@ export class AdminService {
         let options = new RequestOptions({ headers: headers });
 
         return this.http.post(this.uri + "admin/category/create", JSON.stringify(category), options)
+            .map((response: Response) => {
+                console.log(response.text());
+                return response.text();
+            });
+    }
+
+    createProduct(product: Product): Observable<string> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.uri + "admin/product/create", JSON.stringify(product), options)
             .map((response: Response) => {
                 console.log(response.text());
                 return response.text();

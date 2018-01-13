@@ -40,7 +40,7 @@ export class AdminProductComponent implements OnInit {
 
     public libelleCreate_ctrl: FormControl;
     public photoCreate_ctrl: FormControl;
-    public descritionCreate_ctrl: FormControl;
+    public descriptionCreate_ctrl: FormControl;
     public priceCreate_ctrl: FormControl;
     public categoriesCreate: Array<IOption>;
     public createProductForm: FormGroup;
@@ -63,13 +63,12 @@ export class AdminProductComponent implements OnInit {
 
     ngOnInit() {
         this.libelleCreate_ctrl = this.formBulder.control('');
-        //this.photoCreate_ctrl = this.formBulder.control(this.uploader);
-        this.descritionCreate_ctrl = this.formBulder.control('');
+        this.descriptionCreate_ctrl = this.formBulder.control('');
         this.priceCreate_ctrl = this.formBulder.control('');
 
         this.createProductForm = this.formBulder.group({
             libelle: this.libelleCreate_ctrl,
-            descrition: this.descritionCreate_ctrl,
+            description: this.descriptionCreate_ctrl,
             price: this.priceCreate_ctrl,
             id_category: ''
         });
@@ -119,8 +118,12 @@ export class AdminProductComponent implements OnInit {
         this.product = this.createProductForm.value;
         this.product.photo = this.uploader;
         this.product.id_category = this.idCategoryCreate;
-
-        console.log(this.product);
+        
+        this.adminService.createProduct(this.product)
+            .subscribe(result => {
+                alert(result);
+                location.reload(true);
+            });
     }
 
     handleUploader($event) : void {
