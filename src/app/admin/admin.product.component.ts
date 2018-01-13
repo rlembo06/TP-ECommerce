@@ -28,10 +28,14 @@ export class AdminProductComponent implements OnInit {
     public category: Category;
     public categories: Array<Category>;
 
+    public idCategoryCreate: number;
+
     public idUpdate: number;
+    public idCategoryUpdate: number;
     public libelleUpdate: string;
 
     public idDelete: number;
+    public idCategoryDelete: number;
     public libelleDelete: string;
 
     public libelleCreate_ctrl: FormControl;
@@ -65,7 +69,6 @@ export class AdminProductComponent implements OnInit {
 
         this.createProductForm = this.formBulder.group({
             libelle: this.libelleCreate_ctrl,
-            photo: this.uploader,
             descrition: this.descritionCreate_ctrl,
             price: this.priceCreate_ctrl,
             id_category: ''
@@ -113,41 +116,38 @@ export class AdminProductComponent implements OnInit {
     }
 
     createProduct() {
-        console.log(this.createProductForm.value);
-        console.log(this.uploader);
+        this.product = this.createProductForm.value;
+        this.product.photo = this.uploader;
+        this.product.id_category = this.idCategoryCreate;
+
+        console.log(this.product);
     }
 
     handleUploader($event) : void {
         this.handleDataURI($event.target);
     }
-      
+     
+    cancelPhoto($event) : void {
+        this.uploader = null;
+    }
+
     handleDataURI(inputValue: any): void {
         var file:File = inputValue.files[0];
         var myReader:FileReader = new FileReader();
       
         myReader.onloadend = (e) => {
             this.uploader = myReader.result;
-            console.log(this.uploader);
+            //console.log(this.uploader);
         }
         myReader.readAsDataURL(file);
     }
 
-    onSelectedUpdate(option: IOption) {
-        this.libelleUpdate_ctrl = this.formBulder.control(option.label);
-        this.libelleUpdate = option.label;
-
-        this.idUpdate_ctrl = this.formBulder.control(option.value);
-        this.idUpdate = +option.value;
+    onSelectedCategoryCreate(option: IOption) {
+        this.idCategoryCreate = +option.value;
     }
 
-    onSelectedDelete(option: IOption) {
-        this.libelleDelete_ctrl = this.formBulder.control(option.label);
-        this.libelleDelete = option.label;
-
-        this.idDelete_ctrl = this.formBulder.control(option.value);
-        this.idDelete = +option.value;
-
-        console.log('onSelectedDelete :', option);
+    onSelectedCategoryUpdate(option: IOption) {
+        this.idCategoryUpdate = +option.value;
     }
 
     updateProduct() {

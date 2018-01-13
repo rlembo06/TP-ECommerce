@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 <input 
-                id="photoProductCreate" name="photo" formControlName="photo"
+                id="photoProductCreate" name="photo"
                 class="form-control form-control-sm"
                 type="file" accept="image/*" (change)="handleUploader($event)">
             </div>
@@ -42,10 +42,16 @@
                 required/>
             </div>
 
+            <div class="form-group" *ngIf="uploader">
+                <p>Preview :</p>
+                <img src={{uploader}} height="200"/>
+                <button type="button" (click)="cancelPhoto($event)">Annuler ?</button>
+            </div>
+
             <ng-select
                 placeholder="Choix de la catégorie"
                 [options]="categoriesCreate"
-                (selected)="onSelectedUpdate($event)">
+                (selected)="onSelectedCategoryCreate($event)">
             </ng-select>
 
             <div class="form-group">
