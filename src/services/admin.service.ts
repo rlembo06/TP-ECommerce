@@ -49,6 +49,27 @@ export class AdminService {
             });
     }
 
+    getProducts(): Observable<Array<Product>> {
+
+        let user = localStorage.getItem('currentUser');
+        return this.http.get(this.uri + "admin/product/all")
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
+            });
+    }
+
+    getProduct(product: Product): Observable<Product> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(this.uri + "admin/product/get", product, options)
+            .map((response: Response) => {
+                var result = response.text();
+                return JSON.parse(result);
+            });
+    }
+
     updateCategory(category: Category): Observable<string> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });

@@ -52,12 +52,13 @@ export class AdminProductComponent implements OnInit {
     public descriptionUpdate_ctrl: FormControl;
     public priceUpdate_ctrl: FormControl;
     public categoriesUpdate: Array<IOption>;
+    public productsUpdate: Array<IOption>;
     public updateProductForm: FormGroup;
 
     public idDelete_ctrl: FormControl;
     public libelleDelete_ctrl: FormControl;
     public deleteProductForm: FormGroup;
-    public categoriesDelete: Array<IOption>;
+    public productsDelete: Array<IOption>;
 
     constructor(
         private router: Router,
@@ -86,6 +87,7 @@ export class AdminProductComponent implements OnInit {
             libelle: this.libelleUpdate_ctrl,
             description: this.descriptionUpdate_ctrl,
             price: this.priceUpdate_ctrl,
+            category: null
         });
 
         this.deleteProductForm = this.formBulder.group({
@@ -113,15 +115,30 @@ export class AdminProductComponent implements OnInit {
                     }
                 });
 
-                this.categoriesDelete = this.categories.map(function(category){
-                    let categroyId = String(category.id);
+            });  
+            
+        this.adminService.getProducts()
+            .subscribe(result => {
+                this.products = result;
+
+                this.productsUpdate = this.products.map(function(product){
+                    let productId = String(product.id);
                     return {
-                        label: category.libelle,
-                        value: categroyId
+                        label: product.libelle,
+                        value: productId
                     }
                 });
 
-            });        
+                this.productsDelete = this.products.map(function(product){
+                    let productId = String(product.id);
+                    return {
+                        label: product.libelle,
+                        value: productId
+                    }
+                });
+
+            });  
+            
     }
 
     createProduct() {
@@ -170,6 +187,24 @@ export class AdminProductComponent implements OnInit {
             this.uploaderUpdate = myReader.result;
         }
         myReader.readAsDataURL(file);
+    }
+
+    onSelectedUpdate(option: IOption) {
+        this.idUpdate = +option.value;
+        this.product = new Product(this.idUpdate, null, null, null, null, null);
+        
+        this.adminService.getProduct(this.product)
+            .subscribe(result => {
+                this.product = result;
+
+                this.updateProductForm = this.formBulder.group({
+                    id: this.product.id,
+                    libelle: this.product.libelle,
+                    description: this.product.description,
+                    price: this.product.price,
+                    category: String(this.product.id_category)
+                });
+            });
     }
 
     onSelectedCategoryCreate(option: IOption) {
