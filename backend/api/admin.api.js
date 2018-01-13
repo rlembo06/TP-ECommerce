@@ -96,6 +96,27 @@ app.post('/product/create', function (req, res) {
 	});
 });
 
+
+app.get('/product/all', function (req, res) {
+
+	req.accepts('application/json');
+	admin.AllProducts(function (err, rows, fields) {
+		if (!err) res.json(rows);
+		else console.log(err);
+	});
+
+});
+
+app.post('/product/get', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	admin.GetProduct(data, function (err, rows, fields) {
+        if (!err) res.json(rows[0]);
+		else console.log(err);
+	});
+});
+
 /* ---------------------------------- */
 
 

@@ -20,7 +20,8 @@ import { Router } from '@angular/router';
 })
 export class AdminProductComponent implements OnInit {
 
-    public uploader: any;
+    public uploaderCreate: any;
+    public uploaderUpdate: any;
 
     public product: Product;
     public products: Array<Product>;
@@ -28,7 +29,9 @@ export class AdminProductComponent implements OnInit {
     public category: Category;
     public categories: Array<Category>;
 
+    public idCreate: number;
     public idCategoryCreate: number;
+    public libelleCreate: string;
 
     public idUpdate: number;
     public idCategoryUpdate: number;
@@ -39,7 +42,6 @@ export class AdminProductComponent implements OnInit {
     public libelleDelete: string;
 
     public libelleCreate_ctrl: FormControl;
-    public photoCreate_ctrl: FormControl;
     public descriptionCreate_ctrl: FormControl;
     public priceCreate_ctrl: FormControl;
     public categoriesCreate: Array<IOption>;
@@ -47,8 +49,10 @@ export class AdminProductComponent implements OnInit {
 
     public idUpdate_ctrl: FormControl;
     public libelleUpdate_ctrl: FormControl;
-    public updateProductForm: FormGroup;
+    public descriptionUpdate_ctrl: FormControl;
+    public priceUpdate_ctrl: FormControl;
     public categoriesUpdate: Array<IOption>;
+    public updateProductForm: FormGroup;
 
     public idDelete_ctrl: FormControl;
     public libelleDelete_ctrl: FormControl;
@@ -70,7 +74,23 @@ export class AdminProductComponent implements OnInit {
             libelle: this.libelleCreate_ctrl,
             description: this.descriptionCreate_ctrl,
             price: this.priceCreate_ctrl,
-            id_category: ''
+        });
+
+        this.idUpdate_ctrl = this.formBulder.control('');
+        this.libelleUpdate_ctrl = this.formBulder.control('');
+        this.descriptionUpdate_ctrl = this.formBulder.control('');
+        this.priceUpdate_ctrl = this.formBulder.control('');
+
+        this.updateProductForm = this.formBulder.group({
+            id: this.idUpdate_ctrl,
+            libelle: this.libelleUpdate_ctrl,
+            description: this.descriptionUpdate_ctrl,
+            price: this.priceUpdate_ctrl,
+        });
+
+        this.deleteProductForm = this.formBulder.group({
+            libelle: this.libelleDelete,
+            id: this.idDelete
         });
 
         this.adminService.getCategories()
@@ -101,22 +121,12 @@ export class AdminProductComponent implements OnInit {
                     }
                 });
 
-            });
-
-        this.deleteProductForm = this.formBulder.group({
-            libelle: this.libelleDelete,
-            id: this.idDelete
-        });
-
-        this.updateProductForm = this.formBulder.group({
-            libelle: this.libelleUpdate,
-            id: this.idUpdate
-        });
+            });        
     }
 
     createProduct() {
         this.product = this.createProductForm.value;
-        this.product.photo = this.uploader;
+        this.product.photo = this.uploaderCreate;
         this.product.id_category = this.idCategoryCreate;
         
         this.adminService.createProduct(this.product)
@@ -126,21 +136,38 @@ export class AdminProductComponent implements OnInit {
             });
     }
 
-    handleUploader($event) : void {
-        this.handleDataURI($event.target);
+    handleUploaderCreate($event) : void {
+        this.handleDataURICreate($event.target);
     }
      
-    cancelPhoto($event) : void {
-        this.uploader = null;
+    cancelPhotoCreate($event) : void {
+        this.uploaderCreate = null;
     }
 
-    handleDataURI(inputValue: any): void {
+    handleDataURICreate(inputValue: any): void {
         var file:File = inputValue.files[0];
         var myReader:FileReader = new FileReader();
       
         myReader.onloadend = (e) => {
-            this.uploader = myReader.result;
-            //console.log(this.uploader);
+            this.uploaderCreate = myReader.result;
+        }
+        myReader.readAsDataURL(file);
+    }
+
+    handleUploaderUpdate($event) : void {
+        this.handleDataURIUpdate($event.target);
+    }
+     
+    cancelPhotoUpdate($event) : void {
+        this.uploaderUpdate = null;
+    }
+
+    handleDataURIUpdate(inputValue: any): void {
+        var file:File = inputValue.files[0];
+        var myReader:FileReader = new FileReader();
+      
+        myReader.onloadend = (e) => {
+            this.uploaderUpdate = myReader.result;
         }
         myReader.readAsDataURL(file);
     }

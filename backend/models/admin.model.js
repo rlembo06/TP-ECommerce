@@ -19,7 +19,6 @@ module.exports.AllCategories = function (callback) {
     })
 }
 
-
 module.exports.UpdateCategory = function (data, callback) {
     database.getConnection(function (err, connection) {
         if (err) throw err;
@@ -44,6 +43,21 @@ module.exports.CreateProduct = function (data, callback) {
         connection.query(
               'INSERT INTO product (libelle, photo, description, price, id_category)'
             + 'VALUES (\"'+ data.libelle +'\", \"'+ data.photo +'\", \"'+ data.description +'\", '+ data.price +', '+ data.id_category +')'
+        , callback);
+    });
+}
+
+module.exports.AllProducts = function (callback) {
+    database.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query('SELECT * FROM product', callback);
+    })
+}
+
+module.exports.GetProduct = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query(
+            'SELECT * FROM product WHERE id = \"'+ data.id +'\"'
         , callback);
     });
 }
