@@ -54,12 +54,19 @@ module.exports.AllProducts = function (callback) {
     })
 }
 
-module.exports.GetProduct = function (data, callback) {
+module.exports.GetPhoto = function (data, callback) {
     database.getConnection(function (err, connection) {
         connection.query(
-            'SELECT * FROM product WHERE id = \"'+ data.id +'\"'
+            'SELECT photo FROM product WHERE id = \"'+ data.id +'\"'
         , callback);
     });
 }
 
+module.exports.GetProduct = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query(
+            'SELECT id, libelle, description, price, id_category, CONVERT(photo USING utf8) as photo FROM product WHERE id = \"'+ data.id +'\"'
+        , callback);
+    });
+}
 /* ---------------------------------- */

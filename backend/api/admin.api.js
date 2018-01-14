@@ -5,6 +5,10 @@ var app = express();
 var user = require('../models/user.model');
 var admin = require('../models/admin.model');
 
+var fs = require("fs");
+var Datauri = require('datauri');
+var datauri = new Datauri();
+
 
 /* ---------------------------------- */
 /* Login Admin */
@@ -114,6 +118,26 @@ app.post('/product/get', function (req, res) {
 	admin.GetProduct(data, function (err, rows, fields) {
         if (!err) res.json(rows[0]);
 		else console.log(err);
+	});
+});
+
+
+
+app.post('/product/photo', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	admin.GetProduct(data, function (err, rows, fields) {
+
+        if (!err)
+        {
+            datauri.format('.png', fs.readFileSync(rows[0].photo));
+            photo = datauri.base64;
+
+            res.json(photo);
+        }
+        else console.log(err);
+        
 	});
 });
 

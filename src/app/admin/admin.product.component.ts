@@ -204,6 +204,9 @@ export class AdminProductComponent implements OnInit {
                     price: this.product.price,
                     category: String(this.product.id_category)
                 });
+
+                //console.log( this.product.photo );
+                this.uploaderUpdate = this.product.photo ;
             });
     }
 

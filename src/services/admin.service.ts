@@ -65,7 +65,7 @@ export class AdminService {
 
         return this.http.post(this.uri + "admin/product/get", product, options)
             .map((response: Response) => {
-                var result = response.text();
+                let result = response.text();
                 return JSON.parse(result);
             });
     }
