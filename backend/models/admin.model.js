@@ -79,4 +79,9 @@ module.exports.UpdateProduct = function (data, callback) {
     })
 }
 
+module.exports.DeleteProduct = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        connection.query('DELETE FROM product WHERE id = '+ data.id, callback);
+    });
+}
 /* ---------------------------------- */

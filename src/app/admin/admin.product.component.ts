@@ -168,8 +168,13 @@ export class AdminProductComponent implements OnInit {
     }
 
     deleteProduct() {
+        console.log(this.product.id);
 
-        console.log(this.deleteProductForm.value);
+        this.adminService.deleteProduct(this.product)
+            .subscribe(result => {
+                alert(result);
+                location.reload(true);
+            });
     }
 
     handleUploaderCreate($event) : void {
@@ -227,6 +232,11 @@ export class AdminProductComponent implements OnInit {
                 //console.log( this.product.photo );
                 this.uploaderUpdate = this.product.photo ;
             });
+    }
+
+    onSelectedDelete(option: IOption) {
+        this.idDelete = +option.value;
+        this.product = new Product(this.idDelete, null, null, null, null, null);
     }
 
     onSelectedCategoryCreate(option: IOption) {

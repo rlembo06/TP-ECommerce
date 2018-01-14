@@ -134,6 +134,16 @@ app.put('/product', function (req, res) {
 	});
 });
 
+app.put('/product/delete', function (req, res) {
+    var data = req.body;
+
+    req.accepts('application/json');
+	admin.DeleteProduct(data, function (err, rows, fields) {
+        if (!err) res.send("Produit supprimé !");
+		else res.send("Echec de la suppression du produit !");
+	});
+});
+
 /* ---------------------------------- */
 
 

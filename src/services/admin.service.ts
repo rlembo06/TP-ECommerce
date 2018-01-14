@@ -102,5 +102,16 @@ export class AdminService {
                 return response.text();
             });
     }
+
+    deleteProduct(product: Product): Observable<string> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(this.uri + "admin/product/delete", JSON.stringify(product), options)
+            .map((response: Response) => {
+                console.log(response.text());
+                return response.text();
+            });
+    }
 }
 
