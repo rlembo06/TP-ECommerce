@@ -127,6 +127,8 @@ app.put('/product', function (req, res) {
 
     req.accepts('application/json');
 	admin.UpdateProduct(data, function (err, rows, fields) {
+        console.log('ERREUR :', err);
+
         if (!err) res.send("Produit modifié !");
 		else res.send("Echec de la modification du produit !");
 	});
