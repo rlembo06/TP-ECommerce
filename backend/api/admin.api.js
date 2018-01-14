@@ -122,22 +122,13 @@ app.post('/product/get', function (req, res) {
 });
 
 
-
-app.post('/product/photo', function (req, res) {
+app.put('/product', function (req, res) {
     var data = req.body;
 
     req.accepts('application/json');
-	admin.GetProduct(data, function (err, rows, fields) {
-
-        if (!err)
-        {
-            datauri.format('.png', fs.readFileSync(rows[0].photo));
-            photo = datauri.base64;
-
-            res.json(photo);
-        }
-        else console.log(err);
-        
+	admin.UpdateProduct(data, function (err, rows, fields) {
+        if (!err) res.send("Produit modifié !");
+		else res.send("Echec de la modification du produit !");
 	});
 });
 

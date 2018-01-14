@@ -69,4 +69,14 @@ module.exports.GetProduct = function (data, callback) {
         , callback);
     });
 }
+
+module.exports.UpdateProduct = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query(
+            'CALL updateProduct('+ data.id +', \"'+ data.libelle +'\", \"'+ data.photo +'\", \"'+ data.description +'\", '+ data.price +', '+ data.id_category +')'
+        , callback);
+    })
+}
+
 /* ---------------------------------- */

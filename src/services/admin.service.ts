@@ -81,6 +81,17 @@ export class AdminService {
             });
     }
 
+    updateProduct(product: Product): Observable<string> {
+        let headers = new Headers({ "Content-Type": "application/json" });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.put(this.uri + "admin/product", JSON.stringify(product), options)
+            .map((response: Response) => {
+                console.log(response.text());
+                return response.text();
+            });
+    }
+
     deleteCategory(category: Category): Observable<string> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });

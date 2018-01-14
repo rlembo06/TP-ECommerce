@@ -38,7 +38,6 @@ export class AdminProductComponent implements OnInit {
     public libelleUpdate: string;
 
     public idDelete: number;
-    public idCategoryDelete: number;
     public libelleDelete: string;
 
     public libelleCreate_ctrl: FormControl;
@@ -87,7 +86,7 @@ export class AdminProductComponent implements OnInit {
             libelle: this.libelleUpdate_ctrl,
             description: this.descriptionUpdate_ctrl,
             price: this.priceUpdate_ctrl,
-            category: null
+            id_category: null
         });
 
         this.deleteProductForm = this.formBulder.group({
@@ -153,6 +152,26 @@ export class AdminProductComponent implements OnInit {
             });
     }
 
+    updateProduct() {
+        this.product = this.updateProductForm.value;
+        this.product.photo = this.uploaderUpdate;
+        this.product.id_category = this.idCategoryUpdate != null || this.idCategoryUpdate != undefined ? this.idCategoryCreate : 0;
+
+        console.log(this.product);
+        
+        this.adminService.updateProduct(this.product)
+            .subscribe(result => {
+                alert(result);
+                location.reload(true);
+            });
+        
+    }
+
+    deleteProduct() {
+
+        console.log(this.deleteProductForm.value);
+    }
+
     handleUploaderCreate($event) : void {
         this.handleDataURICreate($event.target);
     }
@@ -202,7 +221,7 @@ export class AdminProductComponent implements OnInit {
                     libelle: this.product.libelle,
                     description: this.product.description,
                     price: this.product.price,
-                    category: String(this.product.id_category)
+                    id_category: String(this.product.id_category)
                 });
 
                 //console.log( this.product.photo );
@@ -217,16 +236,5 @@ export class AdminProductComponent implements OnInit {
     onSelectedCategoryUpdate(option: IOption) {
         this.idCategoryUpdate = +option.value;
     }
-
-    updateProduct() {
-
-        console.log(this.updateProductForm.value);
-    }
-
-    deleteProduct() {
-
-        console.log(this.deleteProductForm.value);
-    }
-
 
 }
