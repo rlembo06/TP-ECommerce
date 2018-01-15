@@ -34,4 +34,23 @@ export class ShopService {
                 return JSON.parse(result);
             });
     }
+
+    getCategory(category: Category): Observable<Category> {
+
+        return this.http.get(this.uri + "/category/" + category.id)
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
+            });
+    }
+
+    //getProductsByCategory(category: Category): Observable<Array<Product>> {
+    getProductsByCategory(id): Observable<Array<Product>> {
+
+        return this.http.get(this.uri + "/category/products/" + id)
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
+            });
+    }
 }

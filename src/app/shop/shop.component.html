@@ -2,9 +2,18 @@
 
     <div class="col-lg-3">
 
-      <h1 class="my-4">Shop Name</h1>
+      <h1 class="my-4">Categories</h1>
       <div class="list-group">
-        <a *ngFor="let category of categories" href="#" class="list-group-item">{{category.libelle}}</a>
+          <a href="#" class="list-group-item"
+              (click)="onSelectAllProducts()">
+                Tous les produits
+          </a>
+        <a *ngFor="let category of categories" 
+            href="#" data-id={{category.id}} 
+            class="list-group-item"
+            (click)="onSelectCategory($event)">
+              {{category.libelle}}
+        </a>
       </div>
 
     </div>
@@ -22,7 +31,7 @@
               <h4 class="card-title">
                 <a href="#">{{product.libelle}}</a>
               </h4>
-              <h5>{{product.price}}</h5>
+              <h5>{{product.price}} €</h5>
               <p class="card-text">{{product.description}}</p>
             </div>
           </div>

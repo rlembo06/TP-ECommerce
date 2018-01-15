@@ -14,6 +14,7 @@ export class ShopComponent implements OnInit {
 
     public products: Array<Product>;
     public categories: Array<Category>;
+    public category : Category;
 
     constructor(
         private shopService: ShopService
@@ -29,6 +30,24 @@ export class ShopComponent implements OnInit {
             .subscribe(result => {
                 this.categories = result;
             });  
+    }
+
+    onSelectCategory($event) : void {
+        let target = $event.target || $event.srcElement || $event.currentTarget;
+        let idAttr = target.attributes.id;
+        let id = idAttr.nodeValue;
+
+        this.shopService.getProductsByCategory(id)
+            .subscribe(result => {
+                this.products = result;
+            }); 
+    }
+
+    onSelectAllProducts() : void {
+        this.shopService.getProducts()
+            .subscribe(result => {
+                this.products = result;
+            }); 
     }
 
 }
