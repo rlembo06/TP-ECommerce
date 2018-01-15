@@ -41,7 +41,6 @@ export class AdminService {
 
     getCategories(): Observable<Array<Category>> {
 
-        let user = localStorage.getItem('currentUser');
         return this.http.get(this.uri + "admin/category/all")
             .map((response: Response) => {
                 let result = response.text();
@@ -51,7 +50,6 @@ export class AdminService {
 
     getProducts(): Observable<Array<Product>> {
 
-        let user = localStorage.getItem('currentUser');
         return this.http.get(this.uri + "admin/product/all")
             .map((response: Response) => {
                 let result = response.text();

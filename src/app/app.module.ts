@@ -19,6 +19,7 @@ import {GuardService} from '../services/guard.service';
 import {GuardAdminService} from '../services/guard-admin.service';
 import {UserService} from '../services/user.service';
 import {AdminService} from '../services/admin.service';
+import {ShopService} from '../services/shop.service';
 
 import { UserComponent } from './user/user.component';
 import { NewuserComponent } from './user/newuser.component';
@@ -60,7 +61,8 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
         GuardService,
         GuardAdminService,
         UserService,
-        AdminService
+        AdminService,
+        ShopService
     ],
     bootstrap: [AppComponent]
 })
