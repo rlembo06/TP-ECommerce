@@ -11,7 +11,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { SelectModule } from 'ng-select';
 
 import {AppComponent} from './app.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import {ShopComponent} from './shop/shop.component';
 import {LoginComponent} from './login/login.component';
 
 import {AuthentificationService} from '../services/authentification.service';
@@ -45,7 +45,7 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
     ],
     declarations: [
         AppComponent,
-        DashboardComponent,
+        ShopComponent,
         LoginComponent,
         UserComponent,
         NewuserComponent,
