@@ -16,7 +16,6 @@ export class ShopService {
 		this.uri = "http://localhost:3000/shop";
     }
 
-
     getProducts(): Observable<Array<Product>> {
 
         return this.http.get(this.uri + "/product/all")
@@ -44,7 +43,6 @@ export class ShopService {
             });
     }
 
-    //getProductsByCategory(category: Category): Observable<Array<Product>> {
     getProductsByCategory(id): Observable<Array<Product>> {
 
         return this.http.get(this.uri + "/category/products/" + id)

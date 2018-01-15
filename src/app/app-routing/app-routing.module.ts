@@ -19,6 +19,7 @@ import {LoginAdminComponent} from '../login-admin/login-admin.component';
 
 const routes: Routes = [
     { path: '', component: ShopComponent},
+    { path: 'home', component: ShopComponent},
     { path: 'newuser', component: NewuserComponent },
 
     { path: 'admin', component: AdminComponent, canActivate: [GuardAdminService] },

@@ -144,12 +144,16 @@ export class AdminProductComponent implements OnInit {
         this.product = this.createProductForm.value;
         this.product.photo = this.uploaderCreate;
         this.product.id_category = this.idCategoryCreate;
+
+        if( this.checkSize(this.product.photo) ) {
+
+            this.adminService.createProduct(this.product)
+                .subscribe(result => {
+                    alert(result);
+                    location.reload(true);
+                });
+        } else return;
         
-        this.adminService.createProduct(this.product)
-            .subscribe(result => {
-                alert(result);
-                location.reload(true);
-            });
     }
 
     updateProduct() {
@@ -157,13 +161,14 @@ export class AdminProductComponent implements OnInit {
         this.product.photo = this.uploaderUpdate;
         this.product.id_category = this.idCategoryUpdate != null || this.idCategoryUpdate != undefined ? this.idCategoryCreate : 0;
 
-        console.log(this.product);
+        if( this.checkSize(this.product.photo) ) {
         
-        this.adminService.updateProduct(this.product)
-            .subscribe(result => {
-                alert(result);
-                location.reload(true);
-            });
+            this.adminService.updateProduct(this.product)
+                .subscribe(result => {
+                    alert(result);
+                    location.reload(true);
+                });
+        } else return;
         
     }
 
@@ -206,7 +211,7 @@ export class AdminProductComponent implements OnInit {
     handleDataURIUpdate(inputValue: any): void {
         var file:File = inputValue.files[0];
         var myReader:FileReader = new FileReader();
-      
+        
         myReader.onloadend = (e) => {
             this.uploaderUpdate = myReader.result;
         }
@@ -245,6 +250,18 @@ export class AdminProductComponent implements OnInit {
 
     onSelectedCategoryUpdate(option: IOption) {
         this.idCategoryUpdate = +option.value;
+    }
+
+    checkSize(datauri: any): boolean {
+        var image = new Image(); 
+        image.onload = function(){};
+        image.src = datauri;
+
+        if(image.width <= 500 && image.height <= 500) return true;
+        else {
+            alert('Image trop grande !');
+            return false;  
+        }
     }
 
 }
