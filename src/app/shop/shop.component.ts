@@ -12,13 +12,17 @@ import { Product } from '../../class/product';
 
 export class ShopComponent implements OnInit {
 
+    public tokenPannier: any;
     public products: Array<Product>;
     public categories: Array<Category>;
     public category : Category;
 
     constructor(
         private shopService: ShopService
-    ) {}
+    ) {
+        this.tokenPannier = localStorage.getItem('tokenPannier');
+        console.log(this.tokenPannier);
+    }
 
     ngOnInit() {
         this.shopService.getProducts()
@@ -30,6 +34,21 @@ export class ShopComponent implements OnInit {
             .subscribe(result => {
                 this.categories = result;
             });  
+    }
+
+    onSelectOnPannier($event) : void {
+        let target = $event.target || $event.srcElement || $event.currentTarget;
+        let idAttr = target.attributes.id;
+        let id = idAttr.nodeValue;
+        console.log(id);
+
+        if(this.tokenPannier == null){
+            //localStorage.setItem('tokenPannier', JSON.stringify([]));
+            localStorage.setItem('tokenPannier', JSON.stringify({}));
+            this.tokenPannier = localStorage.getItem('tokenPannier');
+        } 
+        JSON.parse(this.tokenPannier).push(id);
+        console.log(this.tokenPannier);
     }
 
     onSelectCategory($event) : void {
