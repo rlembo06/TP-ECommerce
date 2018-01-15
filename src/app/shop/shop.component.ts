@@ -13,6 +13,7 @@ import { Product } from '../../class/product';
 export class ShopComponent implements OnInit {
 
     public products: Array<Product>;
+    public categories: Array<Category>;
 
     constructor(
         private shopService: ShopService
@@ -22,7 +23,11 @@ export class ShopComponent implements OnInit {
         this.shopService.getProducts()
             .subscribe(result => {
                 this.products = result;
-                console.log(this.products);
+            });  
+
+            this.shopService.getCategories()
+            .subscribe(result => {
+                this.categories = result;
             });  
     }
 

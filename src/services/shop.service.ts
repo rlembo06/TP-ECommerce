@@ -25,4 +25,13 @@ export class ShopService {
                 return JSON.parse(result);
             });
     }
+
+    getCategories(): Observable<Array<Category>> {
+
+        return this.http.get(this.uri + "/category/all")
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
+            });
+    }
 }
