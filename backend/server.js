@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false })); // for parsing application/
 // Import API Routes
 app.use('/user', require('./api/user.api'));
 app.use('/admin', require('./api/admin.api'));
+app.use('/shop', require('./api/shop.api'));
 
 port = process.env.PORT || 3000;
 app.listen(port, function () {
