@@ -63,7 +63,7 @@ export class ShopComponent implements OnInit {
         localStorage.setItem('tokenPannier',
             JSON.stringify( this.pannier ));
 
-        console.log(  localStorage.getItem('tokenPannier') );
+        console.log( this.tokenPannier );
     }
 
     onSelectCategory($event): void {
