@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Observable} from 'rxjs/Observable';
 import { AuthentificationService } from '../services/authentification.service';
+import { ShopService } from '../services/shop.service';
 import {LoginAdminComponent} from './login-admin/login-admin.component';
 
 @Component({
@@ -11,14 +12,22 @@ import {LoginAdminComponent} from './login-admin/login-admin.component';
 })
 
 export class AppComponent  implements OnInit {
-    public numberArticle: number;
+    private numberArticle: Observable<number>;
 
     constructor(
-		private authenticationService: AuthentificationService
-    ) {}
+        private authenticationService: AuthentificationService,
+        private shopService: ShopService
+    ) {
+        //this.numberArticle =  this.shopService.numberArticles();
+    }
 
     ngOnInit() {
-        this.numberArticle =  this.numberArticles();
+        this.numberArticle =  new Observable(observer => {
+            observer.next(
+                this.shopService.numberArticles()
+            );
+        });
+        console.log( this.numberArticle );
     }
 
     logout(): void {
@@ -48,10 +57,5 @@ export class AppComponent  implements OnInit {
 
         if (tokenPannier !== null) return true;
         return false;
-    }
-
-    numberArticles(): number {
-        let tokenPannier = JSON.parse(localStorage.getItem('tokenPannier'));
-        return tokenPannier.length;
     }
 }

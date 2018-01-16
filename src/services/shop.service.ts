@@ -51,4 +51,20 @@ export class ShopService {
                 return JSON.parse(result);
             });
     }
+
+    /*
+    numberArticles(): number {
+        let tokenPannier = JSON.parse(localStorage.getItem('tokenPannier'));
+
+        if(tokenPannier !== null) return tokenPannier.length;
+        else return 0;
+    }
+    */
+
+    numberArticles(): number {
+        let tokenPannier = JSON.parse(localStorage.getItem('tokenPannier'));
+
+        if(tokenPannier !== null) return tokenPannier.length;
+        else return 0;
+    }
 }
