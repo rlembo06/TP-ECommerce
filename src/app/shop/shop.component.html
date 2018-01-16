@@ -8,8 +8,8 @@
               (click)="onSelectAllProducts()">
                 Tous les produits
           </a>
-        <a *ngFor="let category of categories" 
-            href="#" data-id={{category.id}} 
+        <a *ngFor="let category of categories"
+            href="#" data-id={{category.id}}
             class="list-group-item"
             (click)="onSelectCategory($event)">
               {{category.libelle}}
@@ -34,8 +34,9 @@
               <h5>{{product.price}} €</h5>
               <p class="card-text">{{product.description}}</p>
             </div>
-            <button 
-                data-id={{product.id}} 
+            <button
+                data-id={{product.id}}
+                data-name={{product.libelle}}
                 class="btn"
                 (click)="onSelectOnPannier($event)">
                 Ajouter

@@ -13,13 +13,17 @@ import { Product } from '../../class/product';
 export class ShopComponent implements OnInit {
 
     public tokenPannier: any;
+    public pannier: any;
+    public productAdd: any;
+
     public products: Array<Product>;
     public categories: Array<Category>;
-    public category : Category;
+    public category: Category;
 
     constructor(
-        private shopService: ShopService
+        private shopService: ShopService,
     ) {
+        this.pannier = [];
         this.tokenPannier = localStorage.getItem('tokenPannier');
         console.log(this.tokenPannier);
     }
@@ -28,30 +32,41 @@ export class ShopComponent implements OnInit {
         this.shopService.getProducts()
             .subscribe(result => {
                 this.products = result;
-            });  
+            });
 
             this.shopService.getCategories()
             .subscribe(result => {
                 this.categories = result;
-            });  
+            });
     }
 
-    onSelectOnPannier($event) : void {
+    onSelectOnPannier($event): void {
+        // http://www.angulartodo.com/code.html
+
         let target = $event.target || $event.srcElement || $event.currentTarget;
         let idAttr = target.attributes.id;
-        let id = idAttr.nodeValue;
-        console.log(id);
 
-        if(this.tokenPannier == null){
-            //localStorage.setItem('tokenPannier', JSON.stringify([]));
+        let libellePannier = target.attributes.name.value;
+        let idPannier = idAttr.nodeValue;
+
+        this.productAdd = {
+            id: idPannier,
+            libelle: libellePannier
+        };
+
+        if (this.tokenPannier == null) {
             localStorage.setItem('tokenPannier', JSON.stringify({}));
             this.tokenPannier = localStorage.getItem('tokenPannier');
-        } 
-        JSON.parse(this.tokenPannier).push(id);
-        console.log(this.tokenPannier);
+        }
+        this.pannier.push(this.productAdd);
+
+        localStorage.setItem('tokenPannier',
+            JSON.stringify( this.pannier ));
+
+        console.log(  localStorage.getItem('tokenPannier') );
     }
 
-    onSelectCategory($event) : void {
+    onSelectCategory($event): void {
         let target = $event.target || $event.srcElement || $event.currentTarget;
         let idAttr = target.attributes.id;
         let id = idAttr.nodeValue;
@@ -59,14 +74,14 @@ export class ShopComponent implements OnInit {
         this.shopService.getProductsByCategory(id)
             .subscribe(result => {
                 this.products = result;
-            }); 
+            });
     }
 
-    onSelectAllProducts() : void {
+    onSelectAllProducts(): void {
         this.shopService.getProducts()
             .subscribe(result => {
                 this.products = result;
-            }); 
+            });
     }
 
 }
