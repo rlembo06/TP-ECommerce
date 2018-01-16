@@ -12,8 +12,7 @@ import {LoginAdminComponent} from './login-admin/login-admin.component';
 })
 
 export class AppComponent  implements OnInit {
-    private numberArticle: number;
-    private observableArticle: Observable<number>;
+    private articles: number;
 
     constructor(
         private authenticationService: AuthentificationService,
@@ -22,17 +21,14 @@ export class AppComponent  implements OnInit {
 
     ngOnInit() {
         // https://angular-2-training-book.rangle.io/handout/observables/using_observables.html
-        this.observableArticle =  new Observable(observer => {
-            observer.next(
-                this.shopService.numberArticles()
-            );
-        });
+        /*
+        this.shopService.setArticles()
+            .subscribe(result => {
+                this.articles = result;
+            });
+        */
 
-        let articles = this.observableArticle.subscribe(
-            value => this.numberArticle = value,
-            error => console.log(error)
-        );
-        console.log( this.numberArticle );
+        this.articles = this.shopService.setArticles();
     }
 
     logout(): void {

@@ -8,12 +8,17 @@ import { Product } from '../class/product';
 export class ShopService {
 
     private uri: string;
+    //public articles = Observable.of(null);
+    public tokenPannier: any;
+    public pannier: any;
 
     constructor(
         private http: Http
     )
     {
-		this.uri = "http://localhost:3000/shop";
+        this.pannier = [];
+        this.uri = "http://localhost:3000/shop";
+        this.tokenPannier = JSON.parse(localStorage.getItem('tokenPannier'));
     }
 
     getProducts(): Observable<Array<Product>> {
@@ -53,18 +58,17 @@ export class ShopService {
     }
 
     /*
-    numberArticles(): number {
-        let tokenPannier = JSON.parse(localStorage.getItem('tokenPannier'));
+    setArticles(): Observable<number> {
 
-        if(tokenPannier !== null) return tokenPannier.length;
-        else return 0;
+        return this.articles.map(() => {
+            if (this.tokenPannier !== null) return this.tokenPannier.length;
+            else return null;
+        });
     }
     */
 
-    numberArticles(): number {
-        let tokenPannier = JSON.parse(localStorage.getItem('tokenPannier'));
-
-        if(tokenPannier !== null) return tokenPannier.length;
-        else return 0;
+    setArticles(): number {
+        if (this.tokenPannier !== null) return this.tokenPannier.length;
+        else return null;
     }
 }

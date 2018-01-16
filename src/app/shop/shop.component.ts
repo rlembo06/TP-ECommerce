@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../../services/shop.service';
 import { Category } from '../../class/category';
 import { Product } from '../../class/product';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-shop',
@@ -21,10 +22,11 @@ export class ShopComponent implements OnInit {
     public category: Category;
 
     constructor(
+        private router: Router,
         private shopService: ShopService,
     ) {
         this.pannier = [];
-        this.tokenPannier = localStorage.getItem('tokenPannier');
+        this.tokenPannier = JSON.parse(localStorage.getItem('tokenPannier'));
         console.log(this.tokenPannier);
     }
 
@@ -56,14 +58,11 @@ export class ShopComponent implements OnInit {
 
         if (this.tokenPannier == null) {
             localStorage.setItem('tokenPannier', JSON.stringify({}));
-            this.tokenPannier = localStorage.getItem('tokenPannier');
         }
         this.pannier.push(this.productAdd);
 
         localStorage.setItem('tokenPannier',
             JSON.stringify( this.pannier ));
-
-        console.log( this.tokenPannier );
     }
 
     onSelectCategory($event): void {

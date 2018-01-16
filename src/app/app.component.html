@@ -18,7 +18,7 @@
                 <li class="nav-item nav-link logout"  *ngIf="checkAuth()" (click)="logout()">Déconnexion</li>
                 <li *ngIf="checkPannier()" class="dropdown order-1">
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary">
-                        Panier : {{numberArticle}} article(s)
+                        Panier : {{articles}} article(s)
                     </button>
                 </li>
                 <li class="dropdown order-1">
