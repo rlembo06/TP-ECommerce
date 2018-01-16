@@ -12,21 +12,26 @@ import {LoginAdminComponent} from './login-admin/login-admin.component';
 })
 
 export class AppComponent  implements OnInit {
-    private numberArticle: Observable<number>;
+    private numberArticle: number;
+    private observableArticle: Observable<number>;
 
     constructor(
         private authenticationService: AuthentificationService,
         private shopService: ShopService
-    ) {
-        //this.numberArticle =  this.shopService.numberArticles();
-    }
+    ) {}
 
     ngOnInit() {
-        this.numberArticle =  new Observable(observer => {
+        // https://angular-2-training-book.rangle.io/handout/observables/using_observables.html
+        this.observableArticle =  new Observable(observer => {
             observer.next(
                 this.shopService.numberArticles()
             );
         });
+
+        let articles = this.observableArticle.subscribe(
+            value => this.numberArticle = value,
+            error => console.log(error)
+        );
         console.log( this.numberArticle );
     }
 
