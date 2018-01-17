@@ -23,7 +23,6 @@ import {ShopService} from '../services/shop.service';
 
 import { UserComponent } from './user/user.component';
 import { NewuserComponent } from './user/newuser.component';
-import { PannierComponent } from './pannier/pannier.component';
 
 import { AdminComponent } from './admin/admin.component';
 import { AdminUsersComponent } from './admin/admin.users.component';
@@ -51,7 +50,6 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
         LoginComponent,
         UserComponent,
         NewuserComponent,
-        PannierComponent,
         AdminComponent,
         AdminCategoryComponent,
         AdminProductComponent,

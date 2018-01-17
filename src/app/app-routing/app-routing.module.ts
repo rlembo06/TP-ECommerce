@@ -12,7 +12,6 @@ import {ShopComponent} from '../shop/shop.component';
 import {LoginComponent} from '../login/login.component';
 import {UserComponent} from '../user/user.component';
 import {NewuserComponent} from '../user/newuser.component';
-import {PannierComponent} from '../pannier/pannier.component';
 
 import {AdminComponent} from '../admin/admin.component';
 import {LoginAdminComponent} from '../login-admin/login-admin.component';
@@ -23,9 +22,7 @@ const routes: Routes = [
     { path: 'newuser', component: NewuserComponent },
 
     { path: 'admin', component: AdminComponent, canActivate: [GuardAdminService] },
-
     { path: 'user', component: UserComponent, canActivate: [GuardService] },
-    { path: 'pannier', component: PannierComponent, canActivate: [GuardService] },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

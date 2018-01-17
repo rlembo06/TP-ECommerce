@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-shop',
     templateUrl: './shop.component.html',
-    styleUrls: ['./shop.component.css'],
     providers: [ShopService]
 })
 

@@ -7,7 +7,6 @@ import { AuthentificationService } from '../../services/authentification.service
 @Component({
 	selector: 'app-login',
 	templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
     providers: [AuthentificationService]
 })
 
