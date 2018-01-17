@@ -78,8 +78,25 @@ export class AdminUsersComponent implements OnInit {
             });
     }
 
-    onSelectedUpdate($event){
+    onSelectedUpdate(option: IOption) {
+        let idUpdate = +option.value;
+        this.user = new User(idUpdate, null, null, null, null, null, null, null, null, null);
 
+        this.adminService.getProduct(this.user)
+            .subscribe(result => {
+                this.product = result;
+
+                this.updateProductForm = this.formBulder.group({
+                    id: this.product.id,
+                    libelle: this.product.libelle,
+                    description: this.product.description,
+                    price: this.product.price,
+                    id_category: String(this.product.id_category)
+                });
+
+                //console.log( this.product.photo );
+                this.uploaderUpdate = this.product.photo ;
+            });
     }
 
     onSelectedDelete($event){

@@ -22,6 +22,16 @@ app.get('/user/all', function (req, res) {
 
 });
 
+app.get('/user/:id', function (req, res) {
+    var data = req.params.id;
+
+	admin.GetUserById(data, function (err, rows, fields) {
+		if (!err) res.json(rows[0]);
+		else console.log(err);
+	});
+
+});
+
 /* ---------------------------------- */
 
 /* ---------------------------------- */

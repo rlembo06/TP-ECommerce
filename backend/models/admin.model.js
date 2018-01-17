@@ -2,6 +2,20 @@ var express = require('express');
 var database = require('../database/database');
 
 /* ---------------------------------- */
+/* User handle */
+
+module.exports.GetUserById = function (data, callback) {
+    database.getConnection(function (err, connection) {
+        if (err) throw err;
+        connection.query(
+            'SELECT* FROM user WHERE id = '+ data
+        , callback);
+    })
+}
+
+/* ---------------------------------- */
+
+/* ---------------------------------- */
 /* Category handle */
 
 module.exports.CreateCategory = function (data, callback) {
