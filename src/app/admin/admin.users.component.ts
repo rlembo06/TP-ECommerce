@@ -79,23 +79,23 @@ export class AdminUsersComponent implements OnInit {
     }
 
     onSelectedUpdate(option: IOption) {
-        let idUpdate = +option.value;
-        this.user = new User(idUpdate, null, null, null, null, null, null, null, null, null);
+        let id = +option.value;
 
-        this.adminService.getProduct(this.user)
+        this.adminService.getUserById(id)
             .subscribe(result => {
-                this.product = result;
+                this.user = result;
 
-                this.updateProductForm = this.formBulder.group({
-                    id: this.product.id,
-                    libelle: this.product.libelle,
-                    description: this.product.description,
-                    price: this.product.price,
-                    id_category: String(this.product.id_category)
+                this.updateUserForm = this.formBulder.group({
+                    id: this.user.id,
+                    username: this.user.username,
+                    email: this.user.email,
+                    firstname: this.user.firstname,
+                    lastname: this.user.lastname,
+                    city: this.user.city,
+                    street: this.user.street,
+                    cp: this.user.cp,
+                    country: this.user.country
                 });
-
-                //console.log( this.product.photo );
-                this.uploaderUpdate = this.product.photo ;
             });
     }
 

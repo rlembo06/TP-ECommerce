@@ -78,6 +78,15 @@ export class AdminService {
             });
     }
 
+    getUserById(id): Observable<User> {
+
+        return this.http.get(this.uri + "admin/user/" + id)
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
+            });
+    }
+
     updateCategory(category: Category): Observable<string> {
         let headers = new Headers({ "Content-Type": "application/json" });
         let options = new RequestOptions({ headers: headers });
