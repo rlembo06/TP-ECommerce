@@ -61,7 +61,7 @@ app.post('/login', function (req, res) {
 
 app.post('/category/create', function (req, res) {
     var data = req.body;
-
+    console.log(data);
     req.accepts('application/json');
 	admin.CreateCategory(data, function (err, rows, fields) {
         if (!err)
