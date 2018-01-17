@@ -86,7 +86,7 @@ export class AdminProductComponent implements OnInit {
             libelle: this.libelleUpdate_ctrl,
             description: this.descriptionUpdate_ctrl,
             price: this.priceUpdate_ctrl,
-            id_category: null
+            id_category: ''
         });
 
         this.deleteProductForm = this.formBulder.group({
@@ -103,7 +103,7 @@ export class AdminProductComponent implements OnInit {
                     return {
                         label: category.libelle,
                         value: categroyId
-                    }
+                    };
                 });
 
                 this.categoriesUpdate = this.categories.map(function(category){
@@ -111,7 +111,7 @@ export class AdminProductComponent implements OnInit {
                     return {
                         label: category.libelle,
                         value: categroyId
-                    }
+                    };
                 });
 
             });
@@ -125,7 +125,7 @@ export class AdminProductComponent implements OnInit {
                     return {
                         label: product.libelle,
                         value: productId
-                    }
+                    };
                 });
 
                 this.productsDelete = this.products.map(function(product){
@@ -133,7 +133,7 @@ export class AdminProductComponent implements OnInit {
                     return {
                         label: product.libelle,
                         value: productId
-                    }
+                    };
                 });
 
             });
@@ -159,8 +159,9 @@ export class AdminProductComponent implements OnInit {
     updateProduct() {
         this.product = this.updateProductForm.value;
         this.product.photo = this.uploaderUpdate;
-        this.product.id_category = this.idCategoryUpdate != null || this.idCategoryUpdate != undefined ? this.idCategoryCreate : 0;
+        this.product.id_category = this.idCategoryUpdate;
 
+        console.log(this.product);
         if( this.checkSize(this.product.photo) ) {
 
             this.adminService.updateProduct(this.product)
@@ -182,39 +183,39 @@ export class AdminProductComponent implements OnInit {
             });
     }
 
-    handleUploaderCreate($event) : void {
+    handleUploaderCreate($event): void {
         this.handleDataURICreate($event.target);
     }
 
-    cancelPhotoCreate($event) : void {
+    cancelPhotoCreate($event): void {
         this.uploaderCreate = null;
     }
 
     handleDataURICreate(inputValue: any): void {
-        var file:File = inputValue.files[0];
-        var myReader:FileReader = new FileReader();
+        let file: File = inputValue.files[0];
+        let myReader: FileReader = new FileReader();
 
         myReader.onloadend = (e) => {
             this.uploaderCreate = myReader.result;
-        }
+        };
         myReader.readAsDataURL(file);
     }
 
-    handleUploaderUpdate($event) : void {
+    handleUploaderUpdate($event): void {
         this.handleDataURIUpdate($event.target);
     }
 
-    cancelPhotoUpdate($event) : void {
+    cancelPhotoUpdate($event): void {
         this.uploaderUpdate = null;
     }
 
     handleDataURIUpdate(inputValue: any): void {
-        var file:File = inputValue.files[0];
-        var myReader:FileReader = new FileReader();
+        let file: File = inputValue.files[0];
+        let myReader: FileReader = new FileReader();
 
         myReader.onloadend = (e) => {
             this.uploaderUpdate = myReader.result;
-        }
+        };
         myReader.readAsDataURL(file);
     }
 
@@ -234,7 +235,6 @@ export class AdminProductComponent implements OnInit {
                     id_category: String(this.product.id_category)
                 });
 
-                //console.log( this.product.photo );
                 this.uploaderUpdate = this.product.photo ;
             });
     }
@@ -253,7 +253,7 @@ export class AdminProductComponent implements OnInit {
     }
 
     checkSize(datauri: any): boolean {
-        var image = new Image();
+        let image = new Image();
         image.onload = function(){};
         image.src = datauri;
 

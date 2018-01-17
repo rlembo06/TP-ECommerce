@@ -74,6 +74,7 @@
 
             <div class="form-group">
                 <ng-select
+                    formControlName="id_category"
                     placeholder="Choix du produit"
                     [options]="productsUpdate"
                     (selected)="onSelectedUpdate($event)">
