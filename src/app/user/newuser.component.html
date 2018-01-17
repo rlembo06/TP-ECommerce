@@ -1,0 +1,100 @@
+<div id="newuser">
+
+    <section id="createProfil">
+        <h2>Créer son profil</h2>
+
+        <form (ngSubmit)="createUser()" [formGroup]="createUserForm" class="form" role="form" #f="ngForm" novalidate>
+            <p>* : Champs obligatoires</p>
+            
+            <div class="form-group">
+                <input id="usernameCreate" name="username" formControlName="username" 
+                placeholder="Username*" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="emailCreate" name="email" formControlName="email" 
+                placeholder="Email*" 
+                class="form-control form-control-sm" 
+                type="email" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="firstnameCreate" name="firstname" formControlName="firstname" 
+                placeholder="Prénom*" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="lastnameCreate" name="lastname" formControlName="lastname" 
+                placeholder="Nom*" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="cityCreate" name="city" formControlName="city" 
+                placeholder="Ville*" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="streetCreate" name="street" formControlName="street" 
+                placeholder="Rue*" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="cpCreate" name="cp" formControlName="cp" 
+                placeholder="Code Postale*" 
+                class="form-control form-control-sm" 
+                type="number" 
+                required minlength="5" maxlength="5">
+
+                <p *ngIf="createUserForm.get('cp').hasError('minlength')" class="alert alert-danger">Saisir 5 chiffres</p>
+            </div>
+
+            <div class="form-group">
+                <input id="countryCreate" name="country" formControlName="country" 
+                placeholder="Pays*" 
+                class="form-control form-control-sm" 
+                type="text" 
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="passwordCreate" name="password" formControlName="password" 
+                placeholder="Mot de passe*" 
+                class="form-control form-control-sm" 
+                type="password" 
+                required validateEqualTo="confirmPassword">
+            </div>
+
+            <div class="form-group">
+                <input id="confirmPasswordCreate" name="confirmPassword" formControlName="confirmPassword" 
+                placeholder="Confirmer le mot de passe*" 
+                class="form-control form-control-sm" 
+                type="password" 
+                required>
+
+                <p *ngIf="createUserForm.get('password').hasError('validateEqual')" class="alert alert-danger">Les mots de passe doivent correspondre</p>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="createUserForm.invalid" class="btn btn-primary btn-block">Créer</button>
+            </div>
+            
+        </form>
+    </section><hr>
+        
+</div>
