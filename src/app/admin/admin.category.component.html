@@ -33,6 +33,7 @@
             <input type="hidden" value="" id="idCategoryUpdate" name="id" formControlName="id" [(ngModel)]="idUpdate" />
 
             <ng-select
+                placeholder="Choix de la catégorie"
                 [options]="categoriesUpdate"
                 (selected)="onSelectedUpdate($event)">
             </ng-select>
@@ -60,6 +61,7 @@
                 <input type="hidden" value="" id="idCategoryDelete" name="id" formControlName="id" [(ngModel)]="idDelete" />
 
                 <ng-select
+                    placeholder="Choix de la catégorie"
                     [options]="categoriesUpdate"
                     (selected)="onSelectedDelete($event)">
                 </ng-select>

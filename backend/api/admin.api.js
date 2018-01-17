@@ -9,6 +9,20 @@ var fs = require("fs");
 var Datauri = require('datauri');
 var datauri = new Datauri();
 
+/* ---------------------------------- */
+/* User Admin */
+
+app.get('/user/all', function (req, res) {
+
+	req.accepts('application/json');
+	user.All(function (err, rows, fields) {
+		if (!err) res.json(rows);
+		else console.log(err);
+	});
+
+});
+
+/* ---------------------------------- */
 
 /* ---------------------------------- */
 /* Login Admin */

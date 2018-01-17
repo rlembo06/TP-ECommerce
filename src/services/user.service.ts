@@ -55,7 +55,7 @@ export class UserService {
         let user = localStorage.getItem('currentUser');
         return this.http.post(this.uri + "user/get", user, options)
             .map((response: Response) => {
-                var result = response.text();
+                let result = response.text();
                 return JSON.parse(result);
             });
     }

@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 <small>Taille max de l'image : 500 x 500 px</small>
-                <input 
+                <input
                 id="photoProductCreate" name="photo"
                 class="form-control form-control-sm"
                 type="file" accept="image/*" (change)="handleUploaderCreate($event)">
@@ -81,7 +81,7 @@
             </div>
 
             <div class="form-group">
-                <input id="libelleProductUpdate" name="libelle" 
+                <input id="libelleProductUpdate" name="libelle"
                 formControlName="libelle"
                 placeholder="Libelle"
                 class="form-control form-control-sm"
@@ -91,14 +91,14 @@
 
             <div class="form-group">
                 <small>Taille max de l'image : 500 x 500 px</small>
-                <input 
+                <input
                 id="photoProductUpdate" name="photo"
                 class="form-control form-control-sm"
                 type="file" accept="image/*" (change)="handleUploaderUpdate($event)">
             </div>
 
             <div class="form-group">
-                <textarea id="descritionProductUpdate" name="description" 
+                <textarea id="descritionProductUpdate" name="description"
                 formControlName="description"
                 placeholder="Description"
                 class="form-control form-control-sm"
@@ -124,7 +124,7 @@
             <div class="form-group">
                 <ng-select
                     formControlName="id_category" [(ngModel)]="id_category"
-                    placeholder="Choix de la catégorie"
+                    placeholder="Choix du produit"
                     [options]="categoriesUpdate"
                     (selected)="onSelectedCategoryUpdate($event)">
                 </ng-select>

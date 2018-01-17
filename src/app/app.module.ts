@@ -26,6 +26,7 @@ import { NewuserComponent } from './user/newuser.component';
 import { PannierComponent } from './pannier/pannier.component';
 
 import { AdminComponent } from './admin/admin.component';
+import { AdminUsersComponent } from './admin/admin.users.component';
 import { AdminCategoryComponent } from './admin/admin.category.component';
 import { AdminProductComponent } from './admin/admin.product.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
@@ -54,7 +55,8 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
         AdminComponent,
         AdminCategoryComponent,
         AdminProductComponent,
-        LoginAdminComponent
+        LoginAdminComponent,
+        AdminUsersComponent
     ],
     providers: [
         AuthentificationService,

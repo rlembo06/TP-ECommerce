@@ -114,8 +114,8 @@ export class AdminProductComponent implements OnInit {
                     }
                 });
 
-            });  
-            
+            });
+
         this.adminService.getProducts()
             .subscribe(result => {
                 this.products = result;
@@ -136,8 +136,8 @@ export class AdminProductComponent implements OnInit {
                     }
                 });
 
-            });  
-            
+            });
+
     }
 
     createProduct() {
@@ -153,7 +153,7 @@ export class AdminProductComponent implements OnInit {
                     location.reload(true);
                 });
         } else return;
-        
+
     }
 
     updateProduct() {
@@ -162,14 +162,14 @@ export class AdminProductComponent implements OnInit {
         this.product.id_category = this.idCategoryUpdate != null || this.idCategoryUpdate != undefined ? this.idCategoryCreate : 0;
 
         if( this.checkSize(this.product.photo) ) {
-        
+
             this.adminService.updateProduct(this.product)
                 .subscribe(result => {
                     alert(result);
                     location.reload(true);
                 });
         } else return;
-        
+
     }
 
     deleteProduct() {
@@ -185,7 +185,7 @@ export class AdminProductComponent implements OnInit {
     handleUploaderCreate($event) : void {
         this.handleDataURICreate($event.target);
     }
-     
+
     cancelPhotoCreate($event) : void {
         this.uploaderCreate = null;
     }
@@ -193,7 +193,7 @@ export class AdminProductComponent implements OnInit {
     handleDataURICreate(inputValue: any): void {
         var file:File = inputValue.files[0];
         var myReader:FileReader = new FileReader();
-      
+
         myReader.onloadend = (e) => {
             this.uploaderCreate = myReader.result;
         }
@@ -203,7 +203,7 @@ export class AdminProductComponent implements OnInit {
     handleUploaderUpdate($event) : void {
         this.handleDataURIUpdate($event.target);
     }
-     
+
     cancelPhotoUpdate($event) : void {
         this.uploaderUpdate = null;
     }
@@ -211,7 +211,7 @@ export class AdminProductComponent implements OnInit {
     handleDataURIUpdate(inputValue: any): void {
         var file:File = inputValue.files[0];
         var myReader:FileReader = new FileReader();
-        
+
         myReader.onloadend = (e) => {
             this.uploaderUpdate = myReader.result;
         }
@@ -221,7 +221,7 @@ export class AdminProductComponent implements OnInit {
     onSelectedUpdate(option: IOption) {
         this.idUpdate = +option.value;
         this.product = new Product(this.idUpdate, null, null, null, null, null);
-        
+
         this.adminService.getProduct(this.product)
             .subscribe(result => {
                 this.product = result;
@@ -253,14 +253,14 @@ export class AdminProductComponent implements OnInit {
     }
 
     checkSize(datauri: any): boolean {
-        var image = new Image(); 
+        var image = new Image();
         image.onload = function(){};
         image.src = datauri;
 
         if(image.width <= 500 && image.height <= 500) return true;
         else {
             alert('Image trop grande !');
-            return false;  
+            return false;
         }
     }
 

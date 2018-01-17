@@ -1,0 +1,109 @@
+
+<div id="users">
+    <h1>Utilisateurs</h1>
+    <hr>
+
+    <section id="updateProfil">
+        <h2>Modifier un utilisateur</h2>
+
+        <form (ngSubmit)="updateUser()" [formGroup]="updateUserForm" class="form" role="form" #f="ngForm" novalidate>
+
+            <div class="form-group">
+                <ng-select
+                    placeholder="Choix de l'utilisateur"
+                    [options]="usersOptionsUpdate"
+                    (selected)="onSelectedUpdate($event)">
+                </ng-select>
+            </div>
+
+            <div class="form-group">
+                <input id="usernameAdmin" name="username" formControlName="username"
+                placeholder="Username"
+                class="form-control form-control-sm"
+                type="text"
+                disabled>
+            </div>
+
+            <div class="form-group">
+                <input id="emailAdmin" name="email" formControlName="email"
+                placeholder="Email"
+                class="form-control form-control-sm"
+                type="email"
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="firstnameAdmin" name="firstname" formControlName="firstname"
+                placeholder="Prénom"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="lastnameAdmin" name="lastname" formControlName="lastname"
+                placeholder="Nom"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="cityAdmin" name="city" formControlName="city"
+                placeholder="Ville"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="streetAdmin" name="street" formControlName="street"
+                placeholder="Adresse"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="cpAdmin" name="cp" formControlName="cp"
+                placeholder="Code Postale"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <input id="countryAdmin" name="country" formControlName="country"
+                placeholder="Pays"
+                class="form-control form-control-sm"
+                type="text"
+                required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="updateUserForm.invalid" class="btn btn-primary btn-block">Modifier</button>
+            </div>
+        </form>
+
+    </section><hr>
+
+    <section id="deleteUser">
+        <h2>Supprimer un utilisateur</h2>
+
+        <form (ngSubmit)="deleteUser()" [formGroup]="deleteUserForm" class="form" role="form" #f="ngForm" novalidate>
+
+            <input type="hidden" value="" id="idUserDelete" name="id" formControlName="id" />
+
+            <ng-select
+                placeholder="Choix de l'utilisateur"
+                [options]="usersOptionsDelete"
+                (selected)="onSelectedDelete($event)">
+            </ng-select>
+
+            <div class="form-group">
+                <button type="submit" [disabled]="deleteUserForm.invalid" class="btn btn-primary btn-block">Supprimer</button>
+            </div>
+        </form>
+    </section><hr>
+
+</div>

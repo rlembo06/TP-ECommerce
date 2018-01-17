@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { IOption } from 'ng-select';
 import { Category } from '../class/category';
 import { Product } from '../class/product';
+import { User } from '../class/user';
 
 @Injectable()
 export class AdminService {
@@ -36,6 +37,15 @@ export class AdminService {
             .map((response: Response) => {
                 console.log(response.text());
                 return response.text();
+            });
+    }
+
+    getUsers(): Observable<Array<User>> {
+
+        return this.http.get(this.uri + "admin/user/all")
+            .map((response: Response) => {
+                let result = response.text();
+                return JSON.parse(result);
             });
     }
 
