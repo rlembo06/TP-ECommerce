@@ -86,7 +86,7 @@ export class AdminProductComponent implements OnInit {
             libelle: this.libelleUpdate_ctrl,
             description: this.descriptionUpdate_ctrl,
             price: this.priceUpdate_ctrl,
-            id_category: ''
+            id_category: '0'
         });
 
         this.deleteProductForm = this.formBulder.group({
@@ -159,9 +159,11 @@ export class AdminProductComponent implements OnInit {
     updateProduct() {
         this.product = this.updateProductForm.value;
         this.product.photo = this.uploaderUpdate;
-        this.product.id_category = this.idCategoryUpdate;
+        this.product.id_category = isNaN(this.idCategoryUpdate) ? +this.idCategoryUpdate : this.idCategoryUpdate;
 
-        console.log(this.product);
+        console.log(this.product.id_category);
+        console.log(isNaN(this.idCategoryUpdate));
+
         if( this.checkSize(this.product.photo) ) {
 
             this.adminService.updateProduct(this.product)
@@ -251,6 +253,7 @@ export class AdminProductComponent implements OnInit {
     onSelectedCategoryUpdate(option: IOption) {
         this.idCategoryUpdate = +option.value;
     }
+
 
     checkSize(datauri: any): boolean {
         let image = new Image();
