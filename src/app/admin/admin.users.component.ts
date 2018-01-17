@@ -99,16 +99,34 @@ export class AdminUsersComponent implements OnInit {
             });
     }
 
-    onSelectedDelete($event){
+    onSelectedDelete(option: IOption) {
+        let id = +option.value;
+        let username = option.label;
 
+        this.deleteUserForm = this.formBulder.group({
+            id: id
+        });
     }
 
-    updateUser(){
+    updateUser() {
+        this.user = this.updateUserForm.value;
 
+        this.userService.updateUser(this.user)
+            .subscribe(result => {
+                alert(result);
+                location.reload(true);
+            });
     }
 
-    deleteUser(){
+    deleteUser() {
+        this.user = this.deleteUserForm.value;
+        console.log(this.user);
 
+        this.userService.deleteUser(this.user)
+            .subscribe(result => {
+                alert(result);
+                location.reload(true);
+            });
     }
 
 }

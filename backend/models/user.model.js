@@ -63,7 +63,7 @@ module.exports.UpdatePassword = function (data, callback) {
 
 module.exports.Delete = function (data, callback) {
     database.getConnection(function (err, connection) {
-        connection.query('DELETE FROM user WHERE username = \"'+ data.username +'\"', callback);
+        connection.query('DELETE FROM user WHERE username = \"'+ data.username +'\" OR id ='+ data.id, callback);
     });
 }
 
